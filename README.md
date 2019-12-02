@@ -5,3 +5,10 @@
 [![Days completed](https://img.shields.io/badge/Days%20completed-1.5-red)](https://github.com/dejakobniklas/AdventOfCode/)
 
 networkException's Advent of Code challenges
+
+### Check out other solutions :D
++ Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code)
++ Trojaner's [AdventofCode](https://github.com/TrojanerHD/AdventofCode)
++ derNiklaas's [Advent-of-Code-2019](https://github.com/derNiklaas/Advent-of-Code-2019)
++ LeMoonStar's [AdventOfCode2019Solutions](https://github.com/LeMoonStar/AdventOfCode2019Solutions)
++ DCDragonCoder's [AdventOfCode2019](https://github.com/DragonCoder01/AdventOfCode2019)
