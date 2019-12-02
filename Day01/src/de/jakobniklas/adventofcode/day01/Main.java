@@ -17,6 +17,7 @@ public class Main
      */
     public static void main(String[] args)
     {
-        Log.print("Day01", String.format("The total amount of fuel required is '%d'", FuelCalculator.calculate("res/input.txt")));
+        Log.print("Day01/A", String.format("The total amount of fuel required is '%d'", FuelCalculator.calculate("res/input.txt", false)));
+        Log.print("Day01/B", String.format("The total amount of fuel required, while also calculating the amount of fuel required for a given amount of fuel is '%d'", FuelCalculator.calculate("res/input.txt", true)));
     }
 }
