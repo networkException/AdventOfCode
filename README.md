@@ -13,3 +13,5 @@ networkException's Advent of Code challenges
 + derNiklaas' [Advent-of-Code-2019](https://github.com/derNiklaas/Advent-of-Code-2019)
 + LeMoonStar's [AdventOfCode2019Solutions](https://github.com/LeMoonStar/AdventOfCode2019Solutions)
 + DCDragonCoder's [AdventOfCode2019](https://github.com/DragonCoder01/AdventOfCode2019)
++ joblo2213's [AdventOfCode2019](https://github.com/joblo2213/AdventOfCode2019)
++ FeldiM's [AdventOfCode19](https://github.com/feldim2425/AdventOfCode19)
