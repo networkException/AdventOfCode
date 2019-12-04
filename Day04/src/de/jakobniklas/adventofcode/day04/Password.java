@@ -1,11 +1,7 @@
 package de.jakobniklas.adventofcode.day04;
 
-import de.jakobniklas.applicationlib.commonutil.Log;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.IntStream;
 
 public class Password
@@ -25,57 +21,73 @@ public class Password
         return matchingInRange;
     }
 
-    public static boolean matching(int value, boolean allowBlocks)
+    public static boolean stepPattern(int value)
     {
-        Map<Integer, Integer> blocks = new HashMap<>();
-        boolean sameDigits = false;
+        String number = String.valueOf(value);
         int biggestDigit = 0;
 
-        for(Character character : Integer.toString(value).toCharArray())
+        for(int i = 0; i < number.length(); i++)
         {
-            int digit = Integer.parseInt(String.valueOf(character));
+            int digit = Character.digit(number.charAt(i), 10);
 
             if(digit < biggestDigit)
             {
                 return false;
             }
-            else if(digit == biggestDigit)
-            {
-                sameDigits = true;
-            }
-
-            if(!blocks.containsKey(digit))
-            {
-                blocks.put(digit, 1);
-            }
-            else
-            {
-                blocks.replace(digit, blocks.get(digit) + 1);
-            }
 
             biggestDigit = digit;
         }
 
-        if(sameDigits)
-        {
-            if(!allowBlocks)
-            {
-                for(Integer block : blocks.values())
-                {
-                    if(block == 2)
-                    {
-                        Log.print(String.valueOf(value), blocks.toString());
+        return true;
+    }
 
-                        return true;
-                    }
-                    else if(block == 3)
+    public static boolean matching(int value, boolean allowBlocks)
+    {
+        if(!stepPattern(value))
+        {
+            return false;
+        }
+
+        List<Integer> input = new ArrayList<>();
+
+        for(Character character : Integer.toString(value).toCharArray())
+        {
+            input.add(Integer.parseInt(String.valueOf(character)));
+        }
+
+        int head = 0;
+        boolean flag = false;
+
+        for(Integer digit : input)
+        {
+            if(head > 0)
+            {
+                if(digit.equals(input.get(head - 1)))
+                {
+                    if(!flag)
                     {
-                        return false;
+                        flag = true;
+                    }
+                }
+
+                if(head > 1)
+                {
+                    if(digit.equals(input.get(head - 2)))
+                    {
+                        //Log.print(digit + ", " + input.get(head - 2) + " (" + input.toString() + ")");
+
+                        flag = false;
+                    }
+                    else
+                    {
+                        return true;
                     }
                 }
             }
+
+            head++;
         }
 
-        return sameDigits;
+        return flag;
     }
 }
