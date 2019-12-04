@@ -25,9 +25,9 @@ public class Grid
     private Map<Point, Wire> points;
 
     /**
-     * A list of found intersections and the steps taken to the point by every wire
+     * A map of found intersections and the steps taken to the point by every wire
      */
-    private List<Point> intersections;
+    private Map<Point, Wire> intersections;
 
     /**
      * A path to the wire input file
@@ -35,7 +35,7 @@ public class Grid
     private String path;
 
     /**
-     * Creates a new grid and and calls {@link #parseWires()}
+     * Creates a new de.jakobniklas.adventofcode.day03.grid and and calls {@link #parseWires()}
      *
      * @param path The path to the file containing the instructions for wires
      */
@@ -43,7 +43,7 @@ public class Grid
     {
         this.path = path;
         points = new HashMap<>();
-        intersections = new ArrayList<>();
+        intersections = new HashMap<>();
 
         parseWires();
     }
@@ -59,7 +59,7 @@ public class Grid
     {
         List<Integer> distances = new ArrayList<>();
 
-        intersections.forEach((intersection) ->
+        intersections.forEach((intersection, wire) ->
         {
             if(air)
             {
@@ -72,7 +72,7 @@ public class Grid
             }
             else
             {
-                distances.add(intersection.getSteps());
+                distances.add(wire.getSteps());
             }
         });
 
@@ -129,12 +129,13 @@ public class Grid
                         if(points.get(point).getWireId() != wireId.get())
                         {
                             //Add to intersections
-                            intersections.add(point);
-
-                            //Set steps
-                            intersections.get(intersections.indexOf(point)).setSteps(points.get(point).getSteps());
-                            points.get(point).setSteps(0);
-                            intersections.get(intersections.indexOf(point)).addToSteps(steps.get());
+                            if(!intersections.containsKey(point))
+                            {
+                                //Set steps
+                                intersections.put(point, new Wire(points.get(point).getWireId(), points.get(point).getSteps()));
+                                intersections.get(point).addSteps(steps.get());
+                                points.get(point).setSteps(0);
+                            }
                         }
                     }
                 }

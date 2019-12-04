@@ -58,4 +58,14 @@ public class Wire
     {
         this.steps = steps;
     }
+
+    /**
+     * Adds a given amount of steps to the point's steps
+     *
+     * @param steps {@link #steps}
+     */
+    public void addSteps(int steps)
+    {
+        this.steps += steps;
+    }
 }

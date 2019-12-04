@@ -3,7 +3,7 @@ package de.jakobniklas.adventofcode.day03.grid;
 import java.util.Objects;
 
 /**
- * Class storing a point in the grid
+ * Class storing a point in the de.jakobniklas.adventofcode.day03.grid
  *
  * @author networkException
  * @see #x
@@ -22,20 +22,14 @@ import java.util.Objects;
 public class Point
 {
     /**
-     * The x position in the grid, relative to the origin of every wire
+     * The x position in the de.jakobniklas.adventofcode.day03.grid, relative to the origin of every wire
      */
     private int x;
 
     /**
-     * The y position in the grid, relative to the origin of every wire
+     * The y position in the de.jakobniklas.adventofcode.day03.grid, relative to the origin of every wire
      */
     private int y;
-
-    /**
-     * The amount of steps needed for a given point (this value is only used when finding an intersection. The current
-     * step count is stored in {@link Wire#getSteps()})
-     */
-    private int steps;
 
     /**
      * Creates a new point
@@ -66,33 +60,7 @@ public class Point
     }
 
     /**
-     * @return {@link #steps}
-     */
-    public int getSteps()
-    {
-        return steps;
-    }
-
-    /**
-     * @param steps {@link #steps}
-     */
-    public void setSteps(int steps)
-    {
-        this.steps = steps;
-    }
-
-    /**
-     * Adds a given amount of steps to the point's steps
-     *
-     * @param steps {@link #steps}
-     */
-    public void addToSteps(int steps)
-    {
-        this.steps += steps;
-    }
-
-    /**
-     * Checks if two points are equal (ignoring the step count)
+     * Checks if two points are equal
      *
      * @param o The object to compare this to
      *
@@ -109,7 +77,7 @@ public class Point
     }
 
     /**
-     * @return A hash code of this object (ignoring the step count)
+     * @return A hash code of this object
      */
     @Override
     public int hashCode()
@@ -126,7 +94,6 @@ public class Point
         return "Point{" +
             "x=" + x +
             ", y=" + y +
-            ", steps=" + steps +
             '}';
     }
 }
