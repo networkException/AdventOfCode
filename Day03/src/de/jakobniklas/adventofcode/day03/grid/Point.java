@@ -3,18 +3,14 @@ package de.jakobniklas.adventofcode.day03.grid;
 import java.util.Objects;
 
 /**
- * Class storing a point in the de.jakobniklas.adventofcode.day03.grid
+ * Class storing a point in the .grid
  *
  * @author networkException
  * @see #x
  * @see #y
- * @see #steps
  * @see #Point(int, int)
  * @see #getX()
  * @see #getY()
- * @see #getSteps()
- * @see #setSteps(int)
- * @see #addToSteps(int)
  * @see #equals(Object)
  * @see #hashCode()
  * @see #toString()
@@ -22,12 +18,12 @@ import java.util.Objects;
 public class Point
 {
     /**
-     * The x position in the de.jakobniklas.adventofcode.day03.grid, relative to the origin of every wire
+     * The x position in the grid, relative to the origin of every wire
      */
     private int x;
 
     /**
-     * The y position in the de.jakobniklas.adventofcode.day03.grid, relative to the origin of every wire
+     * The y position in the grid, relative to the origin of every wire
      */
     private int y;
 

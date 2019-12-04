@@ -35,7 +35,7 @@ public class Grid
     private String path;
 
     /**
-     * Creates a new de.jakobniklas.adventofcode.day03.grid and and calls {@link #parseWires()}
+     * Creates a new grid and and calls {@link #parseWires()}
      *
      * @param path The path to the file containing the instructions for wires
      */
