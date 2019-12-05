@@ -3,6 +3,7 @@ package de.jakobniklas.adventofcode.day05.computer;
 import de.jakobniklas.adventofcode.day05.computer.instruction.Instruction;
 import de.jakobniklas.adventofcode.day05.computer.instruction.Parameter;
 import de.jakobniklas.adventofcode.day05.computer.instruction.ParameterMode;
+import de.jakobniklas.adventofcode.day05.computer.instruction.impl.*;
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
@@ -85,17 +86,14 @@ public class Computer
         this.ended = false;
         this.debug = false;
 
-        registerInstruction(1, new Instruction(3, (parameters) -> setValue(parameters.get(2).getValue(), getParameter(parameters.get(0)) + getParameter(parameters.get(1)))));
-        registerInstruction(2, new Instruction(3, (parameters) -> setValue(parameters.get(2).getValue(), getParameter(parameters.get(0)) * getParameter(parameters.get(1)))));
-        registerInstruction(3, new Instruction(1, (parameters) ->
-        {
-            Log.print("Computer", String.format("Please input an integer to be put at address '%d'", parameters.get(0).getValue()));
-            Scanner scanner = new Scanner(System.in);
-            setValue(parameters.get(0).getValue(), scanner.nextInt());
-            scanner.close();
-        }));
-
-        registerInstruction(4, new Instruction(1, (parameters) -> Log.print("Computer", String.format("Value at address '%d' is '%d'", parameters.get(0).getValue(), getValue(parameters.get(0).getValue())))));
+        registerInstruction(1, new AddInstruction(this));
+        registerInstruction(2, new MultiplyInstruction(this));
+        registerInstruction(3, new InputInstruction(this));
+        registerInstruction(4, new OutputInstruction(this));
+        registerInstruction(5, new JumpIfTrueInstruction(this));
+        registerInstruction(6, new JumpIfFalseInstruction(this));
+        registerInstruction(7, new LessThanInstruction(this));
+        registerInstruction(8, new EqualsInstruction(this));
         registerInstruction(99, new Instruction(0, (parameters) -> end()));
     }
 
@@ -135,6 +133,11 @@ public class Computer
             else
             {
                 opcode = Integer.parseInt(code);
+            }
+
+            if(opcode == 22)
+            {
+                Log.print("debug");
             }
 
             Instruction instruction = instructions.get(opcode);
@@ -181,10 +184,10 @@ public class Computer
                 debugMemory.set(instructionPointer, String.format("[%s]", debugMemory.get(instructionPointer)));
 
                 Log.print("Memory", debugMemory.toString());
-                Log.print("Instruction", String.format("%s => %s / %s", debugMemory.subList(instructionPointer, instructionPointer + instruction.getParameterCount() + 1).toString(), code, parameters.toString()));
+                //Log.print("Instruction", String.format("%s => %s / %s", debugMemory.subList(instructionPointer, instructionPointer + instruction.getParameterCount() + 1).toString(), code, parameters.toString()));
             }
 
-            instructionPointer += instruction.getParameterCount() + 1;
+            instructionPointer += instruction.isIncreasePointerByParamCount() ? instruction.getParameterCount() + 1 : 0;
 
             if(instructionPointer > memory.size())
             {
@@ -193,41 +196,6 @@ public class Computer
         }
 
         return memory;
-    }
-
-    /**
-     * Returns a value at a given memory address
-     *
-     * @param address The memory address
-     *
-     * @return The value stored at the given address
-     */
-    private int getValue(int address)
-    {
-        return memory.get(address);
-    }
-
-    private int getParameter(Parameter parameter)
-    {
-        if(parameter.getMode().equals(ParameterMode.POSITION))
-        {
-            return getValue(parameter.getValue());
-        }
-        else
-        {
-            return parameter.getValue();
-        }
-    }
-
-    /**
-     * Sets a value at a given address
-     *
-     * @param address The address which should be set
-     * @param value   The value which the value of the address should be set to
-     */
-    private void setValue(int address, int value)
-    {
-        memory.set(address, value);
     }
 
     /**
@@ -246,5 +214,50 @@ public class Computer
         memory = new ArrayList<>(initialState);
         ended = false;
         instructionPointer = 0;
+    }
+
+    /**
+     * Returns a value at a given memory address
+     *
+     * @param address The memory address
+     *
+     * @return The value stored at the given address
+     */
+    public int getValue(int address)
+    {
+        return memory.get(address);
+    }
+
+    public int getParameter(Parameter parameter)
+    {
+        if(parameter.getMode().equals(ParameterMode.POSITION))
+        {
+            return getValue(parameter.getValue());
+        }
+        else
+        {
+            return parameter.getValue();
+        }
+    }
+
+    /**
+     * Sets a value at a given address
+     *
+     * @param address The address which should be set
+     * @param value   The value which the value of the address should be set to
+     */
+    public void setValue(int address, int value)
+    {
+        memory.set(address, value);
+    }
+
+    public void setInstructionPointer(int instructionPointer)
+    {
+        this.instructionPointer = instructionPointer;
+    }
+
+    public void addToInstructionPointer(int amount)
+    {
+        this.instructionPointer += amount;
     }
 }

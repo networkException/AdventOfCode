@@ -24,16 +24,26 @@ public class Instruction
      */
     private int parameterCount;
 
+    private boolean increasePointerByParamCount;
+
     /**
      * Creates a new instruction with a given amount of parameters and the instructions functionality
      *
      * @param parameterCount The amount of parameters
      * @param implementation The instructions functionality (can be a lambda expression)
      */
+    public Instruction(int parameterCount, boolean increasePointerByParamCount, InstructionImplementation implementation)
+    {
+        this.implementation = implementation;
+        this.parameterCount = parameterCount;
+        this.increasePointerByParamCount = increasePointerByParamCount;
+    }
+
     public Instruction(int parameterCount, InstructionImplementation implementation)
     {
         this.implementation = implementation;
         this.parameterCount = parameterCount;
+        this.increasePointerByParamCount = true;
     }
 
     /**
@@ -52,5 +62,10 @@ public class Instruction
     public int getParameterCount()
     {
         return parameterCount;
+    }
+
+    public boolean isIncreasePointerByParamCount()
+    {
+        return increasePointerByParamCount;
     }
 }

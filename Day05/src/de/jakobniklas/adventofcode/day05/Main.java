@@ -18,6 +18,6 @@ public class Main
      */
     public static void main(String[] args)
     {
-        Log.print("Day05/A", String.format("The output is '%d'", new Computer("res/input.txt").compute(false).get(223)));
+        Log.print("Day05", String.format("The output is '%d'", new Computer("res/input.txt").compute(false).get(223)));
     }
 }
