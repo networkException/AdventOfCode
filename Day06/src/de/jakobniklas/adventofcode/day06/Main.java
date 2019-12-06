@@ -17,6 +17,9 @@ public class Main
      */
     public static void main(String[] args)
     {
-        Log.print("Day06/A", String.format("The number of orbits is '%d'", new OrbitMapper("res/input.txt").calculate(false)));
+        OrbitMapper orbitMapper = new OrbitMapper("res/test.txt");
+
+        Log.print("Day06/A", String.format("The number of orbits is '%d'", orbitMapper.calculate(false, false)));
+        Log.print("Day06/B", String.format("The number of orbits is '%d'", orbitMapper.calculate(false, true)));
     }
 }

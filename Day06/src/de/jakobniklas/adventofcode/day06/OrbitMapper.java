@@ -1,88 +1,113 @@
 package de.jakobniklas.adventofcode.day06;
 
+import de.jakobniklas.adventofcode.day06.orbit.SpaceObject;
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class OrbitMapper
 {
-    private List<String> orbits;
-    private Map<String, List<String>> orbitRelations;
+    private List<SpaceObject> spaceObjects;
 
     public OrbitMapper(String path)
     {
-        orbits = new ArrayList<>();
-        orbitRelations = new HashMap<>();
-        orbits.addAll(Arrays.asList(FileUtil.getTextContent(path).split("\n")));
+        spaceObjects = new ArrayList<>();
+
+        //Parses input
+        Arrays.asList(FileUtil.getTextContent(path).split("\n")).forEach((orbit) -> spaceObjects.add(new SpaceObject(orbit.split("\\)")[0], orbit.split("\\)")[1])));
     }
 
-    public int calculate(boolean debug)
+    public int calculate(boolean debug, boolean outputSanToYou)
     {
         AtomicInteger count = new AtomicInteger();
 
-        orbits.forEach((orbit) ->
+        //For each found object
+        spaceObjects.forEach((spaceObject) ->
         {
-            if(!orbitRelations.containsKey(orbit.split("\\)")[0]))
+            //Trace every nodes track to the origin
+            SpaceObject parent = getParent(spaceObject);
+
+            while(!parent.getSpaceObject().equals("COM"))
             {
-                orbitRelations.put(orbit.split("\\)")[0], new ArrayList<>());
-                orbitRelations.get(orbit.split("\\)")[0]).add(orbit.split("\\)")[1]);
+                spaceObject.getTrace().add(parent);
+                parent = getParent(parent);
+                count.getAndIncrement();
             }
-            else
-            {
-                orbitRelations.get(orbit.split("\\)")[0]).add(orbit.split("\\)")[1]);
-            }
+
+            count.getAndIncrement();
         });
 
-        Log.print(orbitRelations.toString());
-        Log.print(orbits.toString());
-
-        orbitRelations.forEach((origin, objects) ->
+        if(outputSanToYou)
         {
-            objects.forEach((object) ->
+            SpaceObject you = get("YOU");
+            SpaceObject santa = get("SAN");
+            SpaceObject intersection = findTraceIntersection(you, santa);
+
+            int transfersFromYou = transfersToObject(intersection, you);
+            int transfersFromSanta = transfersToObject(intersection, santa);
+
+            count.set(transfersFromYou + transfersFromSanta);
+        }
+
+        return count.get();
+    }
+
+    public int transfersToObject(SpaceObject to, SpaceObject from)
+    {
+        AtomicInteger count = new AtomicInteger(0);
+
+        from.getTrace().forEach((traceElement) ->
+        {
+            if(traceElement.getSpaceObject().equals(to.getSpaceObject()))
             {
-                while(true)
-                {
-                    //The object has no origin (COM)
-                    if(object.contains("COM"))
-                    {
-                        if(debug)
-                        {
-                            Log.print(String.format("'%s' has no origin", object));
-                        }
+                count.getAndIncrement();
 
-                        break;
-                    }
-                    else
-                    {
-                        //Get the origin of the object
-                        if(debug)
-                        {
-                            Log.print(String.format("'%s'", object));
-                        }
-
-                        object = new ArrayList<>(getKeys(orbitRelations, object)).get(0);
-                        count.getAndIncrement();
-                    }
-                }
-            });
+                Log.print(from.getSpaceObject(), to.getSpaceObject());
+            }
         });
 
         return count.get();
     }
 
-    public Set<String> getKeys(Map<String, List<String>> map, String value)
+    public SpaceObject findTraceIntersection(SpaceObject first, SpaceObject second)
     {
-        Set<String> keys = new HashSet<>();
+        AtomicInteger highest = new AtomicInteger(0);
 
-        for(Map.Entry<String, List<String>> entry : map.entrySet())
+        first.getTrace().forEach((traceElement) ->
         {
-            if(entry.getValue().contains(value))
+            int indexOf = second.getTrace().indexOf(traceElement);
+
+            if(indexOf != -1)
             {
-                keys.add(entry.getKey());
+                if(indexOf < highest.get())
+                {
+                    highest.set(indexOf);
+                }
             }
-        }
-        return keys;
+        });
+
+        return second.getTrace().get(highest.get() + 1);
+    }
+
+    public SpaceObject get(String spaceObject)
+    {
+        return spaceObjects
+            .stream()
+            .filter(filter -> filter.getSpaceObject().equals(spaceObject))
+            .findFirst()
+            .orElse(new SpaceObject("", "COM"));
+    }
+
+    public SpaceObject getParent(SpaceObject spaceObject)
+    {
+        return spaceObjects
+            .stream()
+            .filter(filter -> filter.getSpaceObject().equals(spaceObject.getParent()))
+            .findFirst()
+            .orElse(new SpaceObject("", "COM"));
     }
 }
