@@ -1,6 +1,5 @@
-package de.jakobniklas.adventofcode.day06;
+package de.jakobniklas.adventofcode.day06.orbit;
 
-import de.jakobniklas.adventofcode.day06.orbit.SpaceObject;
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 
 import java.util.ArrayList;

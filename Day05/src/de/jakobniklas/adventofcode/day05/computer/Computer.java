@@ -117,55 +117,42 @@ public class Computer
      */
     public List<Integer> compute(boolean debug)
     {
+        //Resets the memory every computation
         reset();
         this.debug = debug;
 
         while(!ended)
         {
             String code = Integer.toString(memory.get(instructionPointer));
-
-            int opcode;
-
-            if(code.length() != 1)
-            {
-                opcode = Integer.parseInt(code.substring(code.length() - 2));
-            }
-            else
-            {
-                opcode = Integer.parseInt(code);
-            }
-
-            if(opcode == 22)
-            {
-                Log.print("debug");
-            }
+            int opcode = code.length() != 1 ? Integer.parseInt(code.substring(code.length() - 2)) : Integer.parseInt(code);
 
             Instruction instruction = instructions.get(opcode);
             List<Parameter> parameters = new ArrayList<>();
 
+            //The opcode defines a mode for the parameters
             if(code.length() > 2)
             {
+                //The parameter modes (reverse order)
                 List<String> parameterModes = Arrays.asList(code.substring(0, code.length() - 2).split(""));
+
+                //The values of the parameters
                 List<Integer> parameterValues = memory.subList(instructionPointer + 1, instructionPointer + instruction.getParameterCount() + 1);
 
                 AtomicInteger parameterId = new AtomicInteger();
                 Collections.reverse(parameterModes);
 
+                //Iterate over each value, as the mode can be undefined (no javascript intended)
                 parameterValues.forEach((parameter) ->
                 {
                     if(parameterId.get() < parameterModes.size())
                     {
-                        switch(parameterModes.get(parameterId.get()))
-                        {
-                            case "0":
-                                parameters.add(new Parameter(ParameterMode.POSITION, parameter)); break;
-                            case "1":
-                                parameters.add(new Parameter(ParameterMode.IMMEDIATE, parameter)); break;
-                        }
+                        //Parameter using a given mode
+                        parameters.add(new Parameter(ParameterMode.valueOf(parameterModes.get(parameterId.get())), parameter));
                     }
                     else
                     {
-                        parameters.add(new Parameter(ParameterMode.POSITION, parameter));
+                        //Parameter using the default mode
+                        parameters.add(new Parameter(ParameterMode.getDefault(), parameter));
                     }
 
                     parameterId.getAndIncrement();
@@ -173,9 +160,14 @@ public class Computer
             }
             else
             {
-                memory.subList(instructionPointer + 1, instructionPointer + instruction.getParameterCount() + 1).forEach((value) -> parameters.add(new Parameter(ParameterMode.POSITION, value)));
+                //Normal value parsing (default mode)
+                memory.subList(instructionPointer + 1, instructionPointer + instruction.getParameterCount() + 1).forEach((value) ->
+                {
+                    parameters.add(new Parameter(ParameterMode.getDefault(), value));
+                });
             }
 
+            //Processes the instruction
             instruction.process(parameters);
 
             if(this.debug)
@@ -184,11 +176,15 @@ public class Computer
                 debugMemory.set(instructionPointer, String.format("[%s]", debugMemory.get(instructionPointer)));
 
                 Log.print("Memory", debugMemory.toString());
-                //Log.print("Instruction", String.format("%s => %s / %s", debugMemory.subList(instructionPointer, instructionPointer + instruction.getParameterCount() + 1).toString(), code, parameters.toString()));
+                //Log.print("Instruction", String.format("%s => %s / %s", debugMemory.subList(instructionPointer,
+                //instructionPointer + instruction.getParameterCount() + 1).toString(), code, parameters.toString()));
             }
 
+            //If the instruction modifies the pointer (like jump-if) use their value (already set, so adding 0)
+            //otherwise jump over the instruction (parameters.size())
             instructionPointer += instruction.isIncreasePointerByParamCount() ? instruction.getParameterCount() + 1 : 0;
 
+            //Out of memory scope
             if(instructionPointer > memory.size())
             {
                 break;
@@ -228,6 +224,13 @@ public class Computer
         return memory.get(address);
     }
 
+    /**
+     * Returns a value while respecting the mode set by the parameter
+     *
+     * @param parameter The parameter storing mode and value
+     *
+     * @return The output value
+     */
     public int getParameter(Parameter parameter)
     {
         if(parameter.getMode().equals(ParameterMode.POSITION))
@@ -251,11 +254,19 @@ public class Computer
         memory.set(address, value);
     }
 
+    /**
+     * @param instructionPointer {@link #instructionPointer}
+     */
     public void setInstructionPointer(int instructionPointer)
     {
         this.instructionPointer = instructionPointer;
     }
 
+    /**
+     * Adds a given value to the instructionPointer
+     *
+     * @param amount The given amount to add
+     */
     public void addToInstructionPointer(int amount)
     {
         this.instructionPointer += amount;

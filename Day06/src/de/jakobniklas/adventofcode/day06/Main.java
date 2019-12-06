@@ -1,5 +1,6 @@
 package de.jakobniklas.adventofcode.day06;
 
+import de.jakobniklas.adventofcode.day06.orbit.OrbitMapper;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
 /**

@@ -8,9 +8,12 @@ import java.util.List;
  * @author networkException
  * @see #implementation
  * @see #parameterCount
+ * @see #increasePointerByParamCount
+ * @see #Instruction(int, boolean, InstructionImplementation)
  * @see #Instruction(int, InstructionImplementation)
  * @see #process(List)
  * @see #getParameterCount()
+ * @see #isIncreasePointerByParamCount()
  */
 public class Instruction
 {
@@ -24,13 +27,20 @@ public class Instruction
      */
     private int parameterCount;
 
+    /**
+     * If the pointer should automatically be increased after the instruction has processed (should be false if the
+     * instruction sets the pointer itself, for example jump-if)
+     */
     private boolean increasePointerByParamCount;
 
     /**
      * Creates a new instruction with a given amount of parameters and the instructions functionality
      *
-     * @param parameterCount The amount of parameters
-     * @param implementation The instructions functionality (can be a lambda expression)
+     * @param parameterCount              The amount of parameters
+     * @param increasePointerByParamCount If the pointer should automatically be increased after the instruction has
+     *                                    processed (should be false if the instruction sets the pointer itself, for
+     *                                    example jump-if)
+     * @param implementation              The instructions functionality (can be a lambda expression)
      */
     public Instruction(int parameterCount, boolean increasePointerByParamCount, InstructionImplementation implementation)
     {
@@ -39,6 +49,12 @@ public class Instruction
         this.increasePointerByParamCount = increasePointerByParamCount;
     }
 
+    /**
+     * Creates a new instruction with a given amount of parameters and the instructions functionality
+     *
+     * @param parameterCount The amount of parameters
+     * @param implementation The instructions functionality (can be a lambda expression)
+     */
     public Instruction(int parameterCount, InstructionImplementation implementation)
     {
         this.implementation = implementation;
@@ -64,6 +80,9 @@ public class Instruction
         return parameterCount;
     }
 
+    /**
+     * @return {@link #increasePointerByParamCount}
+     */
     public boolean isIncreasePointerByParamCount()
     {
         return increasePointerByParamCount;

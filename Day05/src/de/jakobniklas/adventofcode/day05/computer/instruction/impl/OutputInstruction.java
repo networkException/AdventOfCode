@@ -4,8 +4,19 @@ import de.jakobniklas.adventofcode.day05.computer.Computer;
 import de.jakobniklas.adventofcode.day05.computer.instruction.Instruction;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
+/**
+ * Class implementing an instruction
+ *
+ * @author networkException
+ * @see #OutputInstruction(Computer)
+ */
 public class OutputInstruction extends Instruction
 {
+    /**
+     * Takes 1 parameter. Outputs the value given in parameter 1 (position or immediate) to the console
+     *
+     * @param util A reference to the computer allowing memory and pointer modification
+     */
     public OutputInstruction(Computer util)
     {
         super(1, (parameters) ->
