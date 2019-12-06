@@ -147,7 +147,7 @@ public class Computer
                     if(parameterId.get() < parameterModes.size())
                     {
                         //Parameter using a given mode
-                        parameters.add(new Parameter(ParameterMode.valueOf(parameterModes.get(parameterId.get())), parameter));
+                        parameters.add(new Parameter(ParameterMode.valueOf(Integer.parseInt(parameterModes.get(parameterId.get()))), parameter));
                     }
                     else
                     {
