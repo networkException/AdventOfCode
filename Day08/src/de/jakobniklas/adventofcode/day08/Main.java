@@ -1,5 +1,8 @@
 package de.jakobniklas.adventofcode.day08;
 
+import de.jakobniklas.adventofcode.day08.image.Parser;
+import de.jakobniklas.applicationlib.commonutil.Log;
+
 /**
  * Main class contacting entry point for JVM
  *
@@ -15,6 +18,6 @@ public class Main
      */
     public static void main(String[] args)
     {
-
+        Log.print("Day08/A", String.valueOf(new Parser("res/input.txt").getPartOneResult()));
     }
 }
