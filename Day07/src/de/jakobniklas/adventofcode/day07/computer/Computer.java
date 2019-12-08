@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * @see #Computer(String)
  * @see #Computer(List)
  * @see #registerInstruction(int, Instruction)
- * @see #compute(boolean)
+ * @see #compute(boolean, boolean)
  * @see #getValue(int)
  * @see #setValue(int, int)
  * @see #end()
@@ -52,6 +52,8 @@ public class Computer
      */
     private int instructionPointer;
 
+    private int initialPointer;
+
     /**
      * If a computation has ended
      */
@@ -61,6 +63,8 @@ public class Computer
      * If debug messages should be visible
      */
     private boolean debug;
+
+    private EndImplementation endImplementation;
 
     /**
      * Creates a new computer and loads the values from a given file
@@ -81,8 +85,9 @@ public class Computer
     {
         this.instructions = new HashMap<>();
         this.initialState = input;
-        this.memory = new ArrayList<>();
-        this.instructionPointer = 0;
+        this.memory = initialState;
+        this.initialPointer = 0;
+        this.instructionPointer = initialPointer;
         this.ended = false;
         this.debug = false;
 
@@ -92,7 +97,20 @@ public class Computer
         registerInstruction(6, new JumpIfFalseInstruction(this));
         registerInstruction(7, new LessThanInstruction(this));
         registerInstruction(8, new EqualsInstruction(this));
-        registerInstruction(99, new Instruction(0, (parameters) -> end()));
+        registerInstruction(99, new Instruction(0, (parameters) ->
+        {
+            end();
+
+            if(debug)
+            {
+                Log.print("Computer", "Ended");
+            }
+
+            if(endImplementation != null)
+            {
+                endImplementation.run();
+            }
+        }));
     }
 
     /**
@@ -111,6 +129,11 @@ public class Computer
         instructions.remove(opcode);
     }
 
+    public void setEndImplementation(EndImplementation endImplementation)
+    {
+        this.endImplementation = endImplementation;
+    }
+
     /**
      * Computes the program
      *
@@ -118,10 +141,18 @@ public class Computer
      *
      * @return The value at address 0 after the computation
      */
-    public List<Integer> compute(boolean debug)
+    public List<Integer> compute(boolean debug, boolean shouldReset)
     {
         //Resets the memory every computation
-        reset();
+        if(shouldReset)
+        {
+            reset();
+        }
+        else
+        {
+            ended = false;
+        }
+
         this.debug = debug;
 
         while(!ended)
@@ -179,7 +210,7 @@ public class Computer
                 debugMemory.set(instructionPointer, String.format("[%s]", debugMemory.get(instructionPointer)));
 
                 Log.print("Memory", debugMemory.toString());
-                Log.print("Instruction", String.format("%s => %s / %s", debugMemory.subList(instructionPointer, instructionPointer + instruction.getParameterCount() + 1).toString(), code, parameters.toString()));
+                //Log.print("Instruction", String.format("%s => %s / %s", debugMemory.subList(instructionPointer, instructionPointer + instruction.getParameterCount() + 1).toString(), code, parameters.toString()));
             }
 
             //If the instruction modifies the pointer (like jump-if) use their value (already set, so adding 0)
@@ -189,6 +220,11 @@ public class Computer
             //Out of memory scope
             if(instructionPointer > memory.size())
             {
+                if(endImplementation != null)
+                {
+                    endImplementation.run();
+                }
+
                 break;
             }
         }
@@ -199,7 +235,7 @@ public class Computer
     /**
      * Ends the current computation
      */
-    private void end()
+    public void end()
     {
         ended = true;
     }
@@ -207,11 +243,21 @@ public class Computer
     /**
      * Resets temporary values before a new computation
      */
-    private void reset()
+    public void reset()
     {
         memory = new ArrayList<>(initialState);
         ended = false;
-        instructionPointer = 0;
+        instructionPointer = initialPointer;
+
+        if(debug)
+        {
+            Log.print("Reset", initialState.toString());
+        }
+    }
+
+    public void setInitialPointer(int initialPointer)
+    {
+        this.initialPointer = initialPointer;
     }
 
     /**
@@ -272,5 +318,25 @@ public class Computer
     public void addToInstructionPointer(int amount)
     {
         this.instructionPointer += amount;
+    }
+
+    public boolean isEnded()
+    {
+        return ended;
+    }
+
+    public void setInitialState(List<Integer> initialState)
+    {
+        this.initialState = initialState;
+    }
+
+    public List<Integer> getMemory()
+    {
+        return memory;
+    }
+
+    public int getInstructionPointer()
+    {
+        return instructionPointer;
     }
 }

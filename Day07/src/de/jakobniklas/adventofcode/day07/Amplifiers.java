@@ -7,11 +7,176 @@ import de.jakobniklas.adventofcode.day07.computer.instruction.impl.ListInputInst
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 public class Amplifiers
 {
+    public static int getLoopedOutput(int phaseA, int phaseB, int phaseC, int phaseD, int phaseE, boolean debug)
+    {
+        //The last output from any amp
+        AtomicInteger lastOutput = new AtomicInteger(0);
+
+        //A pointer keeping track of the value which should be set when opcode 3 (input) gets called
+        AtomicInteger aInputPointer = new AtomicInteger(0);
+        AtomicInteger bInputPointer = new AtomicInteger(0);
+        AtomicInteger cInputPointer = new AtomicInteger(0);
+        AtomicInteger dInputPointer = new AtomicInteger(0);
+        AtomicInteger eInputPointer = new AtomicInteger(0);
+
+        Computer ampA = new Computer("res/software.txt");
+        Computer ampB = new Computer("res/software.txt");
+        Computer ampC = new Computer("res/software.txt");
+        Computer ampD = new Computer("res/software.txt");
+        Computer ampE = new Computer("res/software.txt");
+
+        //Set input behavior
+        ampA.registerInstruction(3, new Instruction(1, parameters ->
+        {
+            switch(aInputPointer.get())
+            {
+                //First round, phase input
+                case 0: ampA.setValue(parameters.get(0).getValue(), phaseA); break;
+
+                //First round, amplifier's input value
+                case 1: ampA.setValue(parameters.get(0).getValue(), 0); break;
+
+                //Output from ampE
+                default: ampA.setValue(parameters.get(0).getValue(), lastOutput.get());
+            }
+
+            aInputPointer.getAndIncrement();
+        }));
+
+        ampB.registerInstruction(3, new Instruction(1, parameters ->
+        {
+            switch(bInputPointer.get())
+            {
+                //First round, phase input
+                case 0: ampB.setValue(parameters.get(0).getValue(), phaseB); break;
+
+                //Output from ampA
+                default: ampB.setValue(parameters.get(0).getValue(), lastOutput.get());
+            }
+
+            bInputPointer.getAndIncrement();
+        }));
+
+        ampC.registerInstruction(3, new Instruction(1, parameters ->
+        {
+            switch(cInputPointer.get())
+            {
+                //First round, phase input
+                case 0: ampC.setValue(parameters.get(0).getValue(), phaseC); break;
+
+                //Output from ampB
+                default: ampC.setValue(parameters.get(0).getValue(), lastOutput.get());
+            }
+
+            cInputPointer.getAndIncrement();
+        }));
+
+        ampD.registerInstruction(3, new Instruction(1, parameters ->
+        {
+            switch(dInputPointer.get())
+            {
+                //First round, phase input
+                case 0: ampD.setValue(parameters.get(0).getValue(), phaseD); break;
+
+                //Output from ampC
+                default: ampD.setValue(parameters.get(0).getValue(), lastOutput.get());
+            }
+
+            dInputPointer.getAndIncrement();
+        }));
+
+        ampE.registerInstruction(3, new Instruction(1, parameters ->
+        {
+            switch(eInputPointer.get())
+            {
+                //First round, phase input
+                case 0: ampE.setValue(parameters.get(0).getValue(), phaseE); break;
+
+                //Output from ampD
+                default: ampE.setValue(parameters.get(0).getValue(), lastOutput.get());
+            }
+
+            eInputPointer.getAndIncrement();
+        }));
+
+        //Set output behavior
+        ampA.registerInstruction(4, new Instruction(1, parameters ->
+        {
+            //Ends the calculation
+            ampA.end();
+
+            //Sets the output value to the input for the next amp
+            lastOutput.set(ampA.getParameter(parameters.get(0)));
+        }));
+
+        ampB.registerInstruction(4, new Instruction(1, parameters ->
+        {
+            //Ends the calculation
+            ampB.end();
+
+            //Sets the output value to the input for the next amp
+            lastOutput.set(ampB.getParameter(parameters.get(0)));
+        }));
+
+        ampC.registerInstruction(4, new Instruction(1, parameters ->
+        {
+            //Ends the calculation
+            ampC.end();
+
+            //Sets the output value to the input for the next amp
+            lastOutput.set(ampC.getParameter(parameters.get(0)));
+        }));
+
+        ampD.registerInstruction(4, new Instruction(1, parameters ->
+        {
+            //Ends the calculation
+            ampD.end();
+
+            //Sets the output value to the input for the next amp
+            lastOutput.set(ampD.getParameter(parameters.get(0)));
+        }));
+
+        ampE.registerInstruction(4, new Instruction(1, parameters ->
+        {
+            //Ends the calculation
+            ampE.end();
+
+            //Sets the output value to the input for the next amp
+            lastOutput.set(ampE.getParameter(parameters.get(0)));
+        }));
+
+        AtomicBoolean ended = new AtomicBoolean(false);
+
+        ampE.setEndImplementation(() -> ended.set(true));
+
+        while(!ended.get())
+        {
+            ampA.compute(debug, false);
+            ampA.setInitialPointer(ampA.getInstructionPointer());
+
+            ampB.compute(debug, false);
+            ampB.setInitialPointer(ampB.getInstructionPointer());
+
+            ampC.compute(debug, false);
+            ampC.setInitialPointer(ampC.getInstructionPointer());
+
+            ampD.compute(debug, false);
+            ampD.setInitialPointer(ampD.getInstructionPointer());
+
+            ampE.compute(debug, false);
+            ampE.setInitialPointer(ampE.getInstructionPointer());
+        }
+
+        return lastOutput.get();
+    }
+
+
     public static int getThrusterOutput(int phaseA, int phaseB, int phaseC, int phaseD, int phaseE)
     {
         ListInputInstruction.resetPointer();
@@ -24,21 +189,41 @@ public class Amplifiers
         {
             computer.unregisterInstruction(3);
             computer.registerInstruction(3, new ListInputInstruction(computer, Arrays.asList(phaseA, output.get(), phaseB, output.get(), phaseC, output.get(), phaseD, output.get(), phaseE, output.get())));
-            computer.compute(false);
+            computer.compute(false, true);
         });
 
         return output.get();
     }
 
-    public static int highest()
+    public static int highest(int from, int to)
     {
         AtomicInteger highest = new AtomicInteger(0);
 
-        IntStream.range(0, 5).forEach((a) -> IntStream.range(0, 5).forEach((b) -> IntStream.range(0, 5).forEach((c) -> IntStream.range(0, 5).forEach((d) -> IntStream.range(0, 5).forEach((e) ->
+        IntStream.range(from, to).forEach((a) -> IntStream.range(from, to).forEach((b) -> IntStream.range(from, to).forEach((c) -> IntStream.range(from, to).forEach((d) -> IntStream.range(from, to).forEach((e) ->
         {
             if(hasDistinctDigits(String.format("%d%d%d%d%d", a, b, c, d, e)))
             {
                 int thrusters = getThrusterOutput(a, b, c, d, e);
+
+                if(thrusters > highest.get())
+                {
+                    highest.set(thrusters);
+                }
+            }
+        })))));
+
+        return highest.get();
+    }
+
+    public static int highestLooped(int from, int to, boolean debug)
+    {
+        AtomicInteger highest = new AtomicInteger(0);
+
+        IntStream.range(from, to).forEach((a) -> IntStream.range(from, to).forEach((b) -> IntStream.range(from, to).forEach((c) -> IntStream.range(from, to).forEach((d) -> IntStream.range(from, to).forEach((e) ->
+        {
+            if(hasDistinctDigits(String.format("%d%d%d%d%d", a, b, c, d, e)))
+            {
+                int thrusters = getLoopedOutput(a, b, c, d, e, debug);
 
                 if(thrusters > highest.get())
                 {

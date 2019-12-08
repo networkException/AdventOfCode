@@ -1,6 +1,4 @@
-package de.jakobniklas.adventofcode.day07;
-
-import de.jakobniklas.applicationlib.commonutil.Log;
+package de.jakobniklas.adventofcode.day08;
 
 /**
  * Main class contacting entry point for JVM
@@ -17,7 +15,6 @@ public class Main
      */
     public static void main(String[] args)
     {
-        Log.print("Day07/A", String.valueOf(Amplifiers.highest(0, 5)));
-        Log.print("Day07/B", String.valueOf(Amplifiers.highestLooped(5, 10, false)));
+
     }
 }
