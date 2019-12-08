@@ -1,0 +1,40 @@
+package de.jakobniklas.adventofcode.day08.image;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Slice
+{
+    private Coordinate coordinate;
+    private List<Integer> pixels;
+
+    public Slice(Coordinate coordinate)
+    {
+        this.coordinate = coordinate;
+        this.pixels = new ArrayList<>();
+    }
+
+    public void addPixel(Integer pixel)
+    {
+        pixels.add(pixel);
+    }
+
+    public List<Integer> getPixels()
+    {
+        return pixels;
+    }
+
+    public Coordinate getCoordinate()
+    {
+        return coordinate;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Slice{" +
+            "coordinate=" + coordinate +
+            ", pixels=" + pixels +
+            '}';
+    }
+}

@@ -15,14 +15,16 @@ public class Parser
     private List<Layer> layers;
     private List<Integer> pixels;
     private List<String> input;
+    private List<Slice> slices;
 
-    public Parser(String path)
+    public Parser(String path, Integer x, Integer y)
     {
         AtomicInteger parsedPixelCount = new AtomicInteger(0);
         AtomicInteger parsedLayerCount = new AtomicInteger(0);
 
         layers = new ArrayList<>();
         pixels = new ArrayList<>();
+        slices = new ArrayList<>();
 
         input = Arrays.asList(FileUtil.getTextContent(path).replace("\n", "").split(""));
         input.forEach((pixel) -> pixels.add(Integer.parseInt(pixel)));
@@ -31,15 +33,37 @@ public class Parser
         {
             layers.add(new Layer());
 
-            IntStream.range(0, 6).forEach((i) -> IntStream.range(0, 25).forEach((j) ->
+            IntStream.range(0, y).forEach((i) -> IntStream.range(0, x).forEach((j) ->
             {
-                layers.get(parsedLayerCount.get()).addPixel(pixels.get(parsedPixelCount.get()));
+                layers.get(parsedLayerCount.get()).countPixel(pixels.get(parsedPixelCount.get()));
+                layers.get(parsedLayerCount.get()).addPixel(new Coordinate(j, i), pixels.get(parsedPixelCount.get()));
 
                 parsedPixelCount.getAndIncrement();
             }));
 
             parsedLayerCount.getAndIncrement();
         }
+
+        layers.get(0).getPixels().keySet().forEach(((coordinate) ->
+        {
+            Slice slice = new Slice(coordinate);
+            layers.forEach((layer) -> slice.addPixel(layer.getPixels().get(coordinate)));
+            slices.add(slice);
+        }));
+    }
+
+    public Pixel processSlice(Slice slice)
+    {
+        for(Integer pixel : slice.getPixels())
+        {
+            switch(pixel)
+            {
+                case 0: return new Pixel(slice.getCoordinate(), false);
+                case 1: return new Pixel(slice.getCoordinate(), true);
+            }
+        }
+
+        return null;
     }
 
     public int getPartOneResult()
@@ -50,5 +74,35 @@ public class Parser
             .get(0);
 
         return targetLayer.pixelCount(1) * targetLayer.pixelCount(2);
+    }
+
+    public void printPartTwo(int x, int y)
+    {
+        List<Pixel> pixels = new ArrayList<>();
+        slices.forEach((slice) -> pixels.add(processSlice(slice)));
+
+        AtomicInteger xPrint = new AtomicInteger(0);
+        AtomicInteger yPrint = new AtomicInteger(0);
+
+        IntStream.range(0, y).forEach((i) ->
+        {
+            System.out.println();
+
+            IntStream.range(0, x).forEach((j) ->
+            {
+                pixels.forEach((pixel) ->
+                {
+                    if(pixel.getCoordinate().getU().equals(xPrint.get()) && pixel.getCoordinate().getV().equals(yPrint.get()))
+                    {
+                        System.out.print(pixel.isWhite() ? "X " : "  ");
+                    }
+                });
+
+                xPrint.getAndIncrement();
+            });
+
+            xPrint.set(0);
+            yPrint.getAndIncrement();
+        });
     }
 }

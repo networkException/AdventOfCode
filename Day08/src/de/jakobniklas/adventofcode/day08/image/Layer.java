@@ -6,35 +6,48 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Layer
 {
-    private Map<Integer, AtomicInteger> pixels;
+    private Map<Integer, AtomicInteger> pixelCounts;
+    private Map<Coordinate, Integer> pixels;
 
     public Layer()
     {
+        pixelCounts = new HashMap<>();
         pixels = new HashMap<>();
     }
 
-    public void addPixel(Integer pixel)
+    public void countPixel(Integer pixel)
     {
-        if(!pixels.containsKey(pixel))
+        if(!pixelCounts.containsKey(pixel))
         {
-            pixels.put(pixel, new AtomicInteger(1));
+            pixelCounts.put(pixel, new AtomicInteger(1));
         }
         else
         {
-            pixels.get(pixel).getAndIncrement();
+            pixelCounts.get(pixel).getAndIncrement();
         }
+    }
+
+    public void addPixel(Coordinate coordinate, Integer pixel)
+    {
+        pixels.put(coordinate, pixel);
     }
 
     public int pixelCount(Integer pixel)
     {
-        return pixels.get(pixel).get();
+        return pixelCounts.get(pixel).get();
+    }
+
+    public Map<Coordinate, Integer> getPixels()
+    {
+        return pixels;
     }
 
     @Override
     public String toString()
     {
         return "Layer{" +
-            "pixels=" + pixels +
+            "pixelCounts=" + pixelCounts +
+            ", pixels=" + pixels +
             '}';
     }
 }

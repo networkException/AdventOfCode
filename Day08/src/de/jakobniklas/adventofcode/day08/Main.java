@@ -18,6 +18,8 @@ public class Main
      */
     public static void main(String[] args)
     {
-        Log.print("Day08/A", String.valueOf(new Parser("res/input.txt").getPartOneResult()));
+        Log.print("Day08/A", String.valueOf(new Parser("res/input.txt", 25, 6).getPartOneResult()));
+        Log.print("Day08/B", ":");
+        new Parser("res/input.txt", 25, 6).printPartTwo(25, 6);
     }
 }
