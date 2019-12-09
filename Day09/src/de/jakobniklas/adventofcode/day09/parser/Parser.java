@@ -40,7 +40,7 @@ public class Parser
 
         while(!ended)
         {
-            instructionRegistry.parseInstruction(String.valueOf(memory.getAtPointer()));
+            ended = instructionRegistry.parseInstruction(String.valueOf(memory.getAtPointer()));
         }
     }
 

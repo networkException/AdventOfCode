@@ -25,7 +25,7 @@ public class InstructionRegistry
         instructions.put(opcode, instruction);
     }
 
-    public void parseInstruction(String code)
+    public boolean parseInstruction(String code)
     {
         //Get registered instruction from opcode
         Instruction instruction = instructions.get(code.length() != 1 ? Integer.parseInt(code.substring(code.length() - 2)) : Integer.parseInt(code));
@@ -34,7 +34,12 @@ public class InstructionRegistry
         List<Parameter> parameters = new ArrayList<>();
 
         //The modes of the parameters (ordered same as the values in memory)
-        List<Integer> parameterModes = code.length() != 1 ? Arrays.stream(new StringBuilder(code.substring(0, code.length() - 2)).reverse().toString().split("")).map(Integer::parseInt).collect(Collectors.toList()) : new ArrayList<>();
+        List<Integer> parameterModes;
+        try
+        {
+            parameterModes = code.length() != 1 ? Arrays.stream(new StringBuilder(code.substring(0, code.length() - 2)).reverse().toString().split("")).map(Integer::parseInt).collect(Collectors.toList()) : new ArrayList<>();
+        }
+        catch(Exception e) {return true;}
 
         //The values of the parameters (from memory)
         List<Long> parameterValues = memory.getSublist(memory.getPointer() + 1, memory.getPointer() + instruction.parameterCount() + 1);
@@ -62,6 +67,8 @@ public class InstructionRegistry
 
         //If the pointer has changed (an instruction like jumpIf), do nothing. Else increment by the amount of parameters to jump over
         memory.addToPointer(beforeInstructionPointer.equals(memory.getPointer()) ? instruction.parameterCount() + 1 : 0L);
+
+        return false;
     }
 
     private void extendModes(List<Integer> modes, List<Long> values)
