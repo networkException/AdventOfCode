@@ -29,6 +29,20 @@ public class Slice
         return coordinate;
     }
 
+    public Pixel processSlice()
+    {
+        for(Integer pixel : getPixels())
+        {
+            switch(pixel)
+            {
+                case 0: return new Pixel(getCoordinate(), false);
+                case 1: return new Pixel(getCoordinate(), true);
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String toString()
     {

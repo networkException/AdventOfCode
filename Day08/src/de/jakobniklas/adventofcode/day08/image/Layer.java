@@ -15,7 +15,7 @@ public class Layer
         pixels = new HashMap<>();
     }
 
-    public void countPixel(Integer pixel)
+    private void countPixel(Integer pixel)
     {
         if(!pixelCounts.containsKey(pixel))
         {
@@ -30,6 +30,8 @@ public class Layer
     public void addPixel(Coordinate coordinate, Integer pixel)
     {
         pixels.put(coordinate, pixel);
+
+        countPixel(pixel);
     }
 
     public int pixelCount(Integer pixel)

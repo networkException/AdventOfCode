@@ -35,7 +35,6 @@ public class Parser
 
             IntStream.range(0, y).forEach((i) -> IntStream.range(0, x).forEach((j) ->
             {
-                layers.get(parsedLayerCount.get()).countPixel(pixels.get(parsedPixelCount.get()));
                 layers.get(parsedLayerCount.get()).addPixel(new Coordinate(j, i), pixels.get(parsedPixelCount.get()));
 
                 parsedPixelCount.getAndIncrement();
@@ -52,20 +51,6 @@ public class Parser
         }));
     }
 
-    public Pixel processSlice(Slice slice)
-    {
-        for(Integer pixel : slice.getPixels())
-        {
-            switch(pixel)
-            {
-                case 0: return new Pixel(slice.getCoordinate(), false);
-                case 1: return new Pixel(slice.getCoordinate(), true);
-            }
-        }
-
-        return null;
-    }
-
     public int getPartOneResult()
     {
         Layer targetLayer = layers.stream()
@@ -79,7 +64,7 @@ public class Parser
     public void printPartTwo(int x, int y)
     {
         List<Pixel> pixels = new ArrayList<>();
-        slices.forEach((slice) -> pixels.add(processSlice(slice)));
+        slices.forEach((slice) -> pixels.add(slice.processSlice()));
 
         AtomicInteger xPrint = new AtomicInteger(0);
         AtomicInteger yPrint = new AtomicInteger(0);
