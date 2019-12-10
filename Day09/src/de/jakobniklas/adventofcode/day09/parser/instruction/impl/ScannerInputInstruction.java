@@ -32,6 +32,8 @@ public class ScannerInputInstruction extends Instruction
                 break;
         }
 
+        Log.measureTime("Start", "lol");
+
         scanner.close();
     }
 }

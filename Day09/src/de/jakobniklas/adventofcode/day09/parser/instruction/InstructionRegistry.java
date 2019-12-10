@@ -35,6 +35,8 @@ public class InstructionRegistry
 
         //The modes of the parameters (ordered same as the values in memory)
         List<Integer> parameterModes;
+
+        //Prevent crash on finish
         try
         {
             parameterModes = code.length() != 1 ? Arrays.stream(new StringBuilder(code.substring(0, code.length() - 2)).reverse().toString().split("")).map(Integer::parseInt).collect(Collectors.toList()) : new ArrayList<>();

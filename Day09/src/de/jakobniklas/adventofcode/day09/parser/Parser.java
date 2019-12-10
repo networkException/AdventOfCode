@@ -2,6 +2,7 @@ package de.jakobniklas.adventofcode.day09.parser;
 
 import de.jakobniklas.adventofcode.day09.parser.instruction.InstructionRegistry;
 import de.jakobniklas.adventofcode.day09.parser.instruction.impl.*;
+import de.jakobniklas.applicationlib.commonutil.Log;
 
 public class Parser
 {
@@ -42,6 +43,8 @@ public class Parser
         {
             ended = instructionRegistry.parseInstruction(String.valueOf(memory.getAtPointer()));
         }
+
+        Log.done("lol");
     }
 
     public static Boolean isDebug()
