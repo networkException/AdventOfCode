@@ -13,6 +13,8 @@ public class Parser
 {
     private Map<Position, Field> fields;
     private Map<Position, Integer> parsed;
+    private Map<Position, Map<Position, Float>> parsedAngles;
+    private List<Position> vaporizedAsteroids;
     private Integer rows;
     private Integer columns;
 
@@ -20,6 +22,8 @@ public class Parser
     {
         fields = new HashMap<>();
         parsed = new HashMap<>();
+        parsedAngles = new HashMap<>();
+        vaporizedAsteroids = new ArrayList<>();
 
         AtomicInteger rowCount = new AtomicInteger(0);
         AtomicInteger columnCount = new AtomicInteger(0);
@@ -43,27 +47,74 @@ public class Parser
         fields.forEach((position, field) -> parsed.put(position, field.isAsteroid() ? 0 : -1));
     }
 
+    public void vaporize(Position origin, List<Target> targets)
+    {
+        int totalTargets = targets.size();
+        List<Target> vaporizedTargets = new ArrayList<>();
+        targets.forEach((target) -> target.setAngle(target.getAngle()));
+
+        //Sorted by angle
+        while(vaporizedTargets.size() < totalTargets)
+        {
+            targets.stream().sorted(Comparator.comparingDouble(Target::getAngle)).distinct().collect(Collectors.toList()).forEach((distinctAngle) ->
+            {
+                List<Target> angleTargets = targets.stream().filter((a) -> a.getAngle().equals(distinctAngle.getAngle())).collect(Collectors.toList());
+
+                if(angleTargets.size() == 1)
+                {
+                    vaporizedTargets.add(angleTargets.get(0));
+                    targets.remove(angleTargets.get(0));
+                }
+                else
+                {
+                    Target nearestTarget = angleTargets.stream().sorted(Comparator.comparingInt(a -> Math.abs(a.getPosition().getX() - origin.getX()) + Math.abs(a.getPosition().getY() - origin.getY()))).collect(Collectors.toList()).get(0);
+
+                    vaporizedTargets.add(nearestTarget);
+                    targets.remove(nearestTarget);
+                }
+            });
+        }
+
+        AtomicInteger count = new AtomicInteger(0);
+
+        parsed.forEach((position, integer) -> parsed.replace(position, -1));
+        vaporizedTargets.forEach((target) -> parsed.replace(target.getPosition(), count.getAndIncrement()));
+
+        print(origin);
+
+        Log.print(String.format("The 1st asteroid to be vaporized is at %d,%d", vaporizedTargets.get(0).getPosition().getX(), vaporizedTargets.get(0).getPosition().getY()));
+        Log.print(String.format("The 200th asteroid to be vaporized is at %d,%d ((%d * 100) + %d = %d)", vaporizedTargets.get(199).getPosition().getX(), vaporizedTargets.get(199).getPosition().getY(), vaporizedTargets.get(199).getPosition().getX(), vaporizedTargets.get(199).getPosition().getY(), (vaporizedTargets.get(199).getPosition().getX() * 100) + vaporizedTargets.get(199).getPosition().getY()));
+    }
+
     public void parse()
     {
+        List<Target> targets = new ArrayList<>();
+
         AtomicReference<Position> asteroid = new AtomicReference<>(new Position(-1, -1));
         AtomicInteger highest = new AtomicInteger(0);
 
         fields.forEach((position, field) ->
         {
+            List<Target> localTargets = new ArrayList<>();
+
             if(field.isAsteroid())
             {
-                int visible = getVisible(position);
+                int visible = getVisible(position, localTargets);
 
                 if(visible > highest.get())
                 {
                     highest.set(visible);
                     asteroid.set(position);
+                    targets.clear();
+                    targets.addAll(localTargets);
                 }
             }
         });
 
         print(asteroid.get());
         Log.print(String.valueOf(highest.get()), asteroid.toString());
+
+        vaporize(asteroid.get(), targets);
     }
 
     public void print(Position highlight)
@@ -79,13 +130,15 @@ public class Parser
                 {
                     if(position.getX().equals(xPrint.get()) && position.getY().equals(yPrint.get()))
                     {
+                        String fieldStr = padLeftZeros(String.valueOf(field));
+
                         if(position.equals(highlight))
                         {
-                            System.out.print(String.format("[%d]", field));
+                            System.out.print(String.format("%s]", fieldStr));
                         }
                         else
                         {
-                            System.out.print(field == -1 ? " . " : String.format(" %d ", field));
+                            System.out.print(field == -1 ? "   . " : String.format("%s ", fieldStr));
                         }
                     }
                 });
@@ -100,7 +153,7 @@ public class Parser
         });
     }
 
-    private Integer getVisible(Position origin)
+    private Integer getVisible(Position origin, List<Target> targets)
     {
         List<Position> asteroids = new ArrayList<>();
 
@@ -115,10 +168,11 @@ public class Parser
         List<Double> angles = new ArrayList<>();
         AtomicInteger blocked = new AtomicInteger(0);
 
-        //Get a list of sorted relative asteroids (manhattan distance), excluding the origin
+        //Get a list of sorted asteroids (manhattan distance), relative to the origin, excluding the origin
         asteroids.stream().sorted(Comparator.comparingInt(a -> Math.abs(a.getX() - origin.getX()) + Math.abs(a.getY() - origin.getY()))).filter((asteroid) -> !asteroid.equals(origin)).collect(Collectors.toList()).forEach((asteroid) ->
         {
             Double angle = getAngle(origin, asteroid);
+            targets.add(new Target(asteroid, angle));
 
             if(!angles.contains(angle))
             {
@@ -140,13 +194,29 @@ public class Parser
 
     private Double getAngle(Position origin, Position ray)
     {
-        float angle = (float) Math.toDegrees(Math.atan2(ray.getY() - origin.getY(), ray.getX() - origin.getX()));
+        double angle = Math.toDegrees(Math.atan2(ray.getY() - origin.getY(), ray.getX() - origin.getX()));
 
-        if(angle < 0)
+        if(angle < -90)
         {
             angle += 360;
         }
 
-        return (double) angle;
+        return angle;
+    }
+
+    private String padLeftZeros(String inputString)
+    {
+        if(inputString.length() >= 4)
+        {
+            return inputString;
+        }
+        StringBuilder sb = new StringBuilder();
+        while(sb.length() < 4 - inputString.length())
+        {
+            sb.append(' ');
+        }
+        sb.append(inputString);
+
+        return sb.toString();
     }
 }

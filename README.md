@@ -2,8 +2,8 @@
 
 [![About](https://img.shields.io/badge/Advent%20of%20Code-2019-brightgreen)](https://adventofcode.com/2019/about)
 [![Language](https://img.shields.io/badge/Language-Java-orange)](https://www.java.com/)
-[![Days completed](https://img.shields.io/badge/Days%20completed-9.5-red)](https://github.com/dejakobniklas/AdventOfCode/)
-[![Stars](https://img.shields.io/badge/Stars-19-yellow)](https://github.com/dejakobniklas/AdventOfCode/)
+[![Days completed](https://img.shields.io/badge/Days%20completed-10-red)](https://github.com/dejakobniklas/AdventOfCode/)
+[![Stars](https://img.shields.io/badge/Stars-20-yellow)](https://github.com/dejakobniklas/AdventOfCode/)
 
 networkException's Advent of Code challenges
 
