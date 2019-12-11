@@ -9,7 +9,7 @@ public class Parser
     private Memory memory;
     private InstructionRegistry instructionRegistry;
     private Boolean ended;
-    private static Boolean debug;
+    public static Boolean debug;
 
     public Parser()
     {

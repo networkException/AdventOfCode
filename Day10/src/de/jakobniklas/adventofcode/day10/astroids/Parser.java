@@ -13,8 +13,6 @@ public class Parser
 {
     private Map<Position, Field> fields;
     private Map<Position, Integer> parsed;
-    private Map<Position, Map<Position, Float>> parsedAngles;
-    private List<Position> vaporizedAsteroids;
     private Integer rows;
     private Integer columns;
 
@@ -22,8 +20,6 @@ public class Parser
     {
         fields = new HashMap<>();
         parsed = new HashMap<>();
-        parsedAngles = new HashMap<>();
-        vaporizedAsteroids = new ArrayList<>();
 
         AtomicInteger rowCount = new AtomicInteger(0);
         AtomicInteger columnCount = new AtomicInteger(0);
