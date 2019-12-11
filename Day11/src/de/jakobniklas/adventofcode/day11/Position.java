@@ -4,21 +4,21 @@ import java.util.Objects;
 
 public class Position
 {
-    private Integer x;
-    private Integer y;
+    private int x;
+    private int y;
 
-    public Position(Integer x, Integer y)
+    public Position(int x, int y)
     {
         this.x = x;
         this.y = y;
     }
 
-    public Integer getX()
+    public int getX()
     {
         return x;
     }
 
-    public Integer getY()
+    public int getY()
     {
         return y;
     }

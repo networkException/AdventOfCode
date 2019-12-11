@@ -7,8 +7,12 @@ import de.jakobniklas.adventofcode.day11.instruction.ImplementationInputInstruct
 import de.jakobniklas.adventofcode.day11.instruction.ImplementationOutputInstruction;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Parser
 {
@@ -25,12 +29,7 @@ public class Parser
 
     private Boolean outputMode;
 
-    public Parser()
-    {
-        this(false);
-    }
-
-    public Parser(Boolean debug)
+    public Parser(Boolean debug, Boolean part2)
     {
         de.jakobniklas.adventofcode.day09.parser.Parser.debug = debug;
         this.ended = false;
@@ -43,6 +42,8 @@ public class Parser
         unique = 0;
 
         outputMode = true;
+
+        panels.put(new Position(0, 0), part2);
 
         instructionRegistry.registerInstruction(1, new AddInstruction());
         instructionRegistry.registerInstruction(2, new MultiplyInstruction());
@@ -65,8 +66,32 @@ public class Parser
             ended = instructionRegistry.parseInstruction(String.valueOf(memory.getAtPointer()));
         }
 
-        Log.print(panels.toString());
         Log.print(String.valueOf(unique));
+        print();
+    }
+
+    private void print()
+    {
+        List<Position> xList = panels.keySet().stream().sorted(Comparator.comparingInt(Position::getX)).collect(Collectors.toList());
+        List<Position> yList = panels.keySet().stream().sorted(Comparator.comparingInt(Position::getY)).collect(Collectors.toList());
+
+        int fromX = xList.get(0).getX();
+        int toX = xList.get(xList.size() - 1).getX();
+        int fromY = yList.get(0).getY();
+        int toY = yList.get(yList.size() - 1).getY();
+
+        IntStream.range(fromY, toY).forEach((y) ->
+        {
+            IntStream.range(fromX, toX).forEach((x) -> panels.forEach((position, white) ->
+            {
+                if(x == position.getX() && y == position.getY())
+                {
+                    System.out.print(white ? "X " : "  ");
+                }
+            }));
+
+            System.out.println();
+        });
     }
 
     private void processOutput(Long output)
@@ -74,7 +99,7 @@ public class Parser
         //Color
         if(outputMode)
         {
-            if(panels.containsKey(robot))
+            if(panels.containsKey(new Position(robot.getX(), robot.getY())))
             {
                 panels.replace(new Position(robot.getX(), robot.getY()), output == 1);
             }

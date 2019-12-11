@@ -15,6 +15,6 @@ public class Main
      */
     public static void main(String[] args)
     {
-        new Parser(false).parse();
+        new Parser(false, true).parse();
     }
 }
