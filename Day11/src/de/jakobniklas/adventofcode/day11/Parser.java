@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -76,19 +77,26 @@ public class Parser
         List<Position> yList = panels.keySet().stream().sorted(Comparator.comparingInt(Position::getY)).collect(Collectors.toList());
 
         int fromX = xList.get(0).getX();
-        int toX = xList.get(xList.size() - 1).getX();
+        int toX = xList.get(xList.size() - 1).getX() + 1;
         int fromY = yList.get(0).getY();
-        int toY = yList.get(yList.size() - 1).getY();
+        int toY = yList.get(yList.size() - 1).getY() + 1;
 
-        IntStream.range(fromY, toY).forEach((y) ->
+        IntStream.range(fromY, toY).map(i -> toY - i + fromY - 1).forEach((y) ->
         {
-            IntStream.range(fromX, toX).forEach((x) -> panels.forEach((position, white) ->
+            IntStream.range(fromX, toX).forEach((x) ->
             {
-                if(x == position.getX() && y == position.getY())
+                AtomicReference<String> out = new AtomicReference<>("  ");
+
+                panels.forEach((position, white) ->
                 {
-                    System.out.print(white ? "X " : "  ");
-                }
-            }));
+                    if(x == position.getX() && y == position.getY())
+                    {
+                        out.set(white ? "X " : "  ");
+                    }
+                });
+
+                System.out.print(out.get());
+            });
 
             System.out.println();
         });
