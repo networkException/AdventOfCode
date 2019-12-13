@@ -19,8 +19,6 @@ public class Day13 extends Day
     @Override
     public String partB(Boolean debug)
     {
-        new Parser(debug).part2(aPath);
-
-        return "null";
+        return String.format("The score after destroying all balls is '%d'", new Parser(debug).part2(aPath));
     }
 }

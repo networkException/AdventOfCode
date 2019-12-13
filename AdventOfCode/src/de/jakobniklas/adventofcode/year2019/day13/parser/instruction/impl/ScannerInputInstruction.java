@@ -31,9 +31,5 @@ public class ScannerInputInstruction extends Instruction
                 memory.set(parameters.get(0), scanner.nextLong());
                 break;
         }
-
-        Log.measureTime("Start", "lol");
-
-        scanner.close();
     }
 }

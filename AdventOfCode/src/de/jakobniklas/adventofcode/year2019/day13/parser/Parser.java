@@ -9,10 +9,7 @@ import de.jakobniklas.adventofcode.year2019.day13.parser.tile.Tile;
 import de.jakobniklas.adventofcode.year2019.day13.parser.tile.TileType;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,7 +22,9 @@ public class Parser
     public static Boolean debug;
 
     private List<Long> outputs;
-    private List<Tile> tiles;
+    private Map<Position, Tile> tiles;
+
+    private Integer score;
 
     public Parser(Boolean debug)
     {
@@ -35,7 +34,8 @@ public class Parser
         this.instructionRegistry = new InstructionRegistry(memory);
 
         outputs = new ArrayList<>();
-        tiles = new ArrayList<>();
+        tiles = new HashMap<>();
+        score = 0;
 
         instructionRegistry.registerInstruction(1, new AddInstruction());
         instructionRegistry.registerInstruction(2, new MultiplyInstruction());
@@ -58,66 +58,78 @@ public class Parser
             ended = instructionRegistry.parseInstruction(String.valueOf(memory.getAtPointer()));
         }
 
+        parseTiles();
+
+        return tiles.values().stream().filter((tile) -> tile.getType().equals(TileType.BLOCK)).count();
+    }
+
+    private void parseTiles()
+    {
         int head = 0;
         while(head < outputs.size())
         {
-            tiles.add(new Tile(outputs.subList(head, head + 3)));
+            Tile tile = new Tile(outputs.subList(head, head + 3));
+
+            if(tile.getType() == null)
+            {
+                score = Math.toIntExact(outputs.subList(head, head + 3).get(2));
+
+                head += 3;
+                continue;
+            }
+
+            if(tiles.containsKey(tile.getPosition()))
+            {
+                tiles.replace(tile.getPosition(), tile);
+            }
+            else
+            {
+                tiles.put(tile.getPosition(), tile);
+            }
 
             head += 3;
         }
-
-        return tiles.stream().filter((tile) -> tile.getType().equals(TileType.BLOCK)).count();
     }
 
-    public Long part2(String path)
+    public Integer part2(String path)
     {
-        AtomicInteger counter = new AtomicInteger();
-        AtomicInteger head = new AtomicInteger();
-
-        instructionRegistry.registerInstruction(4, new ImplementationOutputInstruction((output) ->
-        {
-            outputs.add(output);
-
-            if(counter.get() % 3 == 0 && counter.get() != 0)
-            {
-                if(outputs.get(head.get()) == -1 && outputs.get(head.get() + 2) == 0)
-                {
-                    Log.print("Score: " + outputs.get(head.get() + 3));
-                }
-                else
-                {
-                    tiles.add(new Tile(outputs.subList(head.get(), head.get() + 3)));
-                }
-
-                head.getAndIncrement();
-                head.getAndIncrement();
-                head.getAndIncrement();
-            }
-
-            counter.getAndIncrement();
-        }));
-
-        instructionRegistry.registerInstruction(3, new ImplementationAndScannerInputInstruction(() ->
-        {
-            print();
-            return 0L;
-        }));
-
         memory.loadInitial(path);
         memory.set(new Parameter(ParameterMode.POSITION, 0L), 2L);
+
+        instructionRegistry.registerInstruction(3, new ImplementationInputInstruction(() ->
+        {
+            parseTiles();
+            //print(tiles);
+
+            Integer ballX = tiles.values().stream().filter((tile) -> tile.getType().equals(TileType.BALL)).collect(Collectors.toList()).get(0).getPosition().getX();
+            Integer paddleX = tiles.values().stream().filter((tile) -> tile.getType().equals(TileType.HPADDLE)).collect(Collectors.toList()).get(0).getPosition().getX();
+
+            if(ballX.equals(paddleX))
+            {
+                return 0L;
+            }
+            else if(ballX > paddleX)
+            {
+                return 1L;
+            }
+            else
+            {
+                return -1L;
+            }
+        }));
 
         while(!ended)
         {
             ended = instructionRegistry.parseInstruction(String.valueOf(memory.getAtPointer()));
         }
 
-        return tiles.stream().filter((tile) -> tile.getType().equals(TileType.BLOCK)).count();
+        return Math.toIntExact(outputs.get(outputs.size() - 1));
     }
 
-    private void print()
+    private void print(Map<Position, Tile> tiles)
     {
-        List<Position> xList = tiles.stream().map(Tile::getPosition).sorted(Comparator.comparingInt(Position::getX)).collect(Collectors.toList());
-        List<Position> yList = tiles.stream().map(Tile::getPosition).sorted(Comparator.comparingInt(Position::getY)).collect(Collectors.toList());
+        List<Position> xList = tiles.values().stream().map(Tile::getPosition).sorted(Comparator.comparingInt(Position::getX)).collect(Collectors.toList());
+        List<Position> yList = tiles.values().stream().map(Tile::getPosition).sorted(Comparator.comparingInt(Position::getY)).collect(Collectors.toList());
 
         int fromX = xList.get(0).getX();
         int toX = xList.get(xList.size() - 1).getX() + 1;
@@ -130,10 +142,15 @@ public class Parser
             {
                 AtomicReference<String> out = new AtomicReference<>(" ");
 
-                tiles.forEach((tile) ->
+                tiles.forEach((position, tile) ->
                 {
                     if(x == tile.getPosition().getX() && y == tile.getPosition().getY())
                     {
+                        if(tile.getType() == null)
+                        {
+                            Log.print(tile.toString());
+                        }
+
                         switch(tile.getType())
                         {
                             case BLOCK: out.set("B"); break;
