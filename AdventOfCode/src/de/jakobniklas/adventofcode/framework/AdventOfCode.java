@@ -22,6 +22,8 @@ public abstract class AdventOfCode
         List<Integer> aDaysToExecute = args.stream().filter((arg) -> arg.startsWith("--ADay")).map((arg) -> Integer.parseInt(arg.split("--ADay")[1])).collect(Collectors.toList());
         List<Integer> bDaysToExecute = args.stream().filter((arg) -> arg.startsWith("--BDay")).map((arg) -> Integer.parseInt(arg.split("--BDay")[1])).collect(Collectors.toList());
 
+        Log.measureTime("Running day(s)", "aocProcess");
+
         if(args.size() == 0)
         {
             days.keySet().forEach((day) ->
@@ -33,6 +35,8 @@ public abstract class AdventOfCode
 
         aDaysToExecute.forEach((day) -> Log.print(String.format("%s/Day%d/A", year, day), days.get(day).partA(debug)));
         bDaysToExecute.forEach((day) -> Log.print(String.format("%s/Day%d/B", year, day), days.get(day).partB(debug)));
+
+        Log.done("aocProcess");
     }
 
     public abstract void registerDays(Map<Integer, Day> days);
