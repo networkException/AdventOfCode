@@ -19,6 +19,6 @@ public class Day12 extends Day
     @Override
     public String partB(Boolean debug)
     {
-        return "null";
+        return String.format("The iterations until the system repeats is '%d'", new MoonSystem(aPath).simulateSystem());
     }
 }

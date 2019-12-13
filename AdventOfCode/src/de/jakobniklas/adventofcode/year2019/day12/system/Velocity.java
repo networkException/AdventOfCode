@@ -1,5 +1,7 @@
 package de.jakobniklas.adventofcode.year2019.day12.system;
 
+import java.util.Objects;
+
 public class Velocity
 {
     private Integer x;
@@ -71,5 +73,26 @@ public class Velocity
             ", y=" + y +
             ", z=" + z +
             '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Velocity velocity = (Velocity) o;
+        return Objects.equals(x, velocity.x) &&
+            Objects.equals(y, velocity.y) &&
+            Objects.equals(z, velocity.z);
+    }
+
+    public String stringCode()
+    {
+        return String.format("%d%d%d", x, y, z);
+    }
+
+    public Boolean isZero()
+    {
+        return x == 0 && y == 0 && z == 0;
     }
 }

@@ -2,8 +2,10 @@ package de.jakobniklas.adventofcode.year2019.day12.system;
 
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class MoonSystem
@@ -12,6 +14,13 @@ public class MoonSystem
     private Moon europa;
     private Moon ganymede;
     private Moon callisto;
+
+    private String ioInitial;
+    private String europaInitial;
+    private String ganymedeInitial;
+    private String callistoInitial;
+
+    private List<String> hashes;
 
     public MoonSystem(String path)
     {
@@ -22,7 +31,34 @@ public class MoonSystem
         ganymede = new Moon(moons.get(2).substring(1, moons.get(2).length() - 1));
         callisto = new Moon(moons.get(3).substring(1, moons.get(3).length() - 1));
 
+        ioInitial = io.stringCode();
+        europaInitial = europa.stringCode();
+        ganymedeInitial = ganymede.stringCode();
+        callistoInitial = callisto.stringCode();
+
         IntStream.range(0, 1000).forEach((i) -> calculate());
+    }
+
+    public Long simulateSystem()
+    {
+        hashes = new ArrayList<>();
+        Long count = 0L;
+
+        while(true)
+        {
+            calculate();
+
+            if(hashes.contains(this.stringCode()))
+            {
+                break;
+            }
+
+            hashes.add(this.stringCode());
+
+            count++;
+        }
+
+        return count;
     }
 
     public void calculate()
@@ -52,5 +88,22 @@ public class MoonSystem
     public Integer getTotalEnergy()
     {
         return io.getEnergy() + europa.getEnergy() + ganymede.getEnergy() + callisto.getEnergy();
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        MoonSystem that = (MoonSystem) o;
+        return Objects.equals(io, that.io) &&
+            Objects.equals(europa, that.europa) &&
+            Objects.equals(ganymede, that.ganymede) &&
+            Objects.equals(callisto, that.callisto);
+    }
+
+    public String stringCode()
+    {
+        return String.format("%s%s%s%s", io.stringCode(), europa.stringCode(), ganymede.stringCode(), callisto.stringCode());
     }
 }

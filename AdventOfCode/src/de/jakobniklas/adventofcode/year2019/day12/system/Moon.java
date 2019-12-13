@@ -1,5 +1,7 @@
 package de.jakobniklas.adventofcode.year2019.day12.system;
 
+import java.util.Objects;
+
 public class Moon
 {
     private Position position;
@@ -79,5 +81,25 @@ public class Moon
             "position=" + position +
             ", velocity=" + velocity +
             '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Moon moon = (Moon) o;
+        return Objects.equals(position, moon.position) &&
+            Objects.equals(velocity, moon.velocity);
+    }
+
+    public String stringCode()
+    {
+        return String.format("%s%s", position.stringCode(), velocity.stringCode());
+    }
+
+    public Boolean zeroVelocity()
+    {
+        return velocity.isZero();
     }
 }

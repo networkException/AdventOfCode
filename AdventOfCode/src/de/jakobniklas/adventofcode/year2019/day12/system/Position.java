@@ -1,5 +1,7 @@
 package de.jakobniklas.adventofcode.year2019.day12.system;
 
+import java.util.Objects;
+
 public class Position
 {
     private Integer x;
@@ -69,5 +71,21 @@ public class Position
             ", y=" + y +
             ", z=" + z +
             '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return Objects.equals(x, position.x) &&
+            Objects.equals(y, position.y) &&
+            Objects.equals(z, position.z);
+    }
+
+    public String stringCode()
+    {
+        return String.format("%d%d%d", x, y, z);
     }
 }
