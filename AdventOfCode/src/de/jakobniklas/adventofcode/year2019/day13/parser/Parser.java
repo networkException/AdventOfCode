@@ -24,8 +24,6 @@ public class Parser
     private List<Long> outputs;
     private Map<Position, Tile> tiles;
 
-    private Integer score;
-
     public Parser(Boolean debug)
     {
         Parser.debug = debug;
@@ -35,7 +33,6 @@ public class Parser
 
         outputs = new ArrayList<>();
         tiles = new HashMap<>();
-        score = 0;
 
         instructionRegistry.registerInstruction(1, new AddInstruction());
         instructionRegistry.registerInstruction(2, new MultiplyInstruction());
@@ -72,8 +69,6 @@ public class Parser
 
             if(tile.getType() == null)
             {
-                score = Math.toIntExact(outputs.subList(head, head + 3).get(2));
-
                 head += 3;
                 continue;
             }

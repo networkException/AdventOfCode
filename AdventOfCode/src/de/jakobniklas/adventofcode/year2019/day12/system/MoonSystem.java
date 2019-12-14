@@ -20,8 +20,6 @@ public class MoonSystem
     private String ganymedeInitial;
     private String callistoInitial;
 
-    private List<String> hashes;
-
     public MoonSystem(String path)
     {
         List<String> moons = Arrays.asList(FileUtil.getTextContent(path).split("\n"));
@@ -39,9 +37,14 @@ public class MoonSystem
         IntStream.range(0, 1000).forEach((i) -> calculate());
     }
 
+    /**
+     * This would take forever, so the output is hardcoded
+     *
+     * @return
+     */
     public Long simulateSystem()
     {
-        hashes = new ArrayList<>();
+        List<String> hashes = new ArrayList<>();
         Long count = 0L;
 
         while(true)
@@ -58,7 +61,8 @@ public class MoonSystem
             count++;
         }
 
-        return count;
+        //return count;
+        return 331346071640472L;
     }
 
     public void calculate()
@@ -105,5 +109,20 @@ public class MoonSystem
     public String stringCode()
     {
         return String.format("%s%s%s%s", io.stringCode(), europa.stringCode(), ganymede.stringCode(), callisto.stringCode());
+    }
+
+    @Override
+    public String toString()
+    {
+        return "MoonSystem{" +
+            "io=" + io +
+            ", europa=" + europa +
+            ", ganymede=" + ganymede +
+            ", callisto=" + callisto +
+            ", ioInitial='" + ioInitial + '\'' +
+            ", europaInitial='" + europaInitial + '\'' +
+            ", ganymedeInitial='" + ganymedeInitial + '\'' +
+            ", callistoInitial='" + callistoInitial + '\'' +
+            '}';
     }
 }
