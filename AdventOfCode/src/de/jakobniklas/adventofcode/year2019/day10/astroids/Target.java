@@ -24,6 +24,30 @@ public class Target
         return vaporised;
     }
 
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(angle);
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Target target = (Target) o;
+        return Objects.equals(angle, target.angle);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Target{" +
+            "position=" + position +
+            ", angle=" + angle +
+            '}';
+    }
+
     public Double getAngle()
     {
         return angle;
@@ -37,29 +61,5 @@ public class Target
     public Position getPosition()
     {
         return position;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Target{" +
-            "position=" + position +
-            ", angle=" + angle +
-            '}';
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if(this == o) return true;
-        if(o == null || getClass() != o.getClass()) return false;
-        Target target = (Target) o;
-        return Objects.equals(angle, target.angle);
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(angle);
     }
 }

@@ -3,11 +3,21 @@ package de.jakobniklas.adventofcode.year2019.day07.computer;
 import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.Instruction;
 import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.Parameter;
 import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.ParameterMode;
-import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.impl.*;
+import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.impl.AddInstruction;
+import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.impl.EqualsInstruction;
+import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.impl.JumpIfFalseInstruction;
+import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.impl.JumpIfTrueInstruction;
+import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.impl.LessThanInstruction;
+import de.jakobniklas.adventofcode.year2019.day07.computer.instruction.impl.MultiplyInstruction;
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -127,11 +137,6 @@ public class Computer
     public void unregisterInstruction(int opcode)
     {
         instructions.remove(opcode);
-    }
-
-    public void setEndImplementation(EndImplementation endImplementation)
-    {
-        this.endImplementation = endImplementation;
     }
 
     /**
@@ -255,11 +260,6 @@ public class Computer
         }
     }
 
-    public void setInitialPointer(int initialPointer)
-    {
-        this.initialPointer = initialPointer;
-    }
-
     /**
      * Returns a value at a given memory address
      *
@@ -303,14 +303,6 @@ public class Computer
     }
 
     /**
-     * @param instructionPointer {@link #instructionPointer}
-     */
-    public void setInstructionPointer(int instructionPointer)
-    {
-        this.instructionPointer = instructionPointer;
-    }
-
-    /**
      * Adds a given value to the instructionPointer
      *
      * @param amount The given amount to add
@@ -325,11 +317,6 @@ public class Computer
         return ended;
     }
 
-    public void setInitialState(List<Integer> initialState)
-    {
-        this.initialState = initialState;
-    }
-
     public List<Integer> getMemory()
     {
         return memory;
@@ -338,5 +325,28 @@ public class Computer
     public int getInstructionPointer()
     {
         return instructionPointer;
+    }
+
+    /**
+     * @param instructionPointer {@link #instructionPointer}
+     */
+    public void setInstructionPointer(int instructionPointer)
+    {
+        this.instructionPointer = instructionPointer;
+    }
+
+    public void setEndImplementation(EndImplementation endImplementation)
+    {
+        this.endImplementation = endImplementation;
+    }
+
+    public void setInitialPointer(int initialPointer)
+    {
+        this.initialPointer = initialPointer;
+    }
+
+    public void setInitialState(List<Integer> initialState)
+    {
+        this.initialState = initialState;
     }
 }

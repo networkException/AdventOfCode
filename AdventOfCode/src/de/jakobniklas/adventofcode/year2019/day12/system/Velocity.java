@@ -15,36 +15,6 @@ public class Velocity
         z = 0;
     }
 
-    public Integer getX()
-    {
-        return x;
-    }
-
-    public Integer getY()
-    {
-        return y;
-    }
-
-    public Integer getZ()
-    {
-        return z;
-    }
-
-    public void setX(Integer x)
-    {
-        this.x = x;
-    }
-
-    public void setY(Integer y)
-    {
-        this.y = y;
-    }
-
-    public void setZ(Integer z)
-    {
-        this.z = z;
-    }
-
     public void addToX(Integer x)
     {
         this.x += x;
@@ -60,9 +30,15 @@ public class Velocity
         this.z += z;
     }
 
-    public Integer getKineticEnergy()
+    @Override
+    public boolean equals(Object o)
     {
-        return Math.abs(x) + Math.abs(y) + Math.abs(z);
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Velocity velocity = (Velocity) o;
+        return Objects.equals(x, velocity.x) &&
+            Objects.equals(y, velocity.y) &&
+            Objects.equals(z, velocity.z);
     }
 
     @Override
@@ -75,17 +51,6 @@ public class Velocity
             '}';
     }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if(this == o) return true;
-        if(o == null || getClass() != o.getClass()) return false;
-        Velocity velocity = (Velocity) o;
-        return Objects.equals(x, velocity.x) &&
-            Objects.equals(y, velocity.y) &&
-            Objects.equals(z, velocity.z);
-    }
-
     public String stringCode()
     {
         return String.format("%d%d%d", x, y, z);
@@ -94,5 +59,40 @@ public class Velocity
     public Boolean isZero()
     {
         return x == 0 && y == 0 && z == 0;
+    }
+
+    public Integer getX()
+    {
+        return x;
+    }
+
+    public void setX(Integer x)
+    {
+        this.x = x;
+    }
+
+    public Integer getY()
+    {
+        return y;
+    }
+
+    public void setY(Integer y)
+    {
+        this.y = y;
+    }
+
+    public Integer getZ()
+    {
+        return z;
+    }
+
+    public void setZ(Integer z)
+    {
+        this.z = z;
+    }
+
+    public Integer getKineticEnergy()
+    {
+        return Math.abs(x) + Math.abs(y) + Math.abs(z);
     }
 }

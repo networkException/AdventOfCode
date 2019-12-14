@@ -40,19 +40,12 @@ public class Point
     }
 
     /**
-     * @return {@link #x}
+     * @return A hash code of this object
      */
-    public int getX()
+    @Override
+    public int hashCode()
     {
-        return x;
-    }
-
-    /**
-     * @return {@link #y}
-     */
-    public int getY()
-    {
-        return y;
+        return Objects.hash(x, y);
     }
 
     /**
@@ -73,15 +66,6 @@ public class Point
     }
 
     /**
-     * @return A hash code of this object
-     */
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(x, y);
-    }
-
-    /**
      * @return A string interpretation of the object
      */
     @Override
@@ -91,5 +75,21 @@ public class Point
             "x=" + x +
             ", y=" + y +
             '}';
+    }
+
+    /**
+     * @return {@link #x}
+     */
+    public int getX()
+    {
+        return x;
+    }
+
+    /**
+     * @return {@link #y}
+     */
+    public int getY()
+    {
+        return y;
     }
 }

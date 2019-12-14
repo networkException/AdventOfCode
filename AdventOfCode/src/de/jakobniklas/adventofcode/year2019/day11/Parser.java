@@ -2,7 +2,14 @@ package de.jakobniklas.adventofcode.year2019.day11;
 
 import de.jakobniklas.adventofcode.year2019.day09.parser.Memory;
 import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.InstructionRegistry;
-import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.*;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.AddInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.EndInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.EqualsInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.JumpIfFalseInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.JumpIfTrueInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.LessThanInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.MultiplyInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.RelativeAdjustmentInstruction;
 import de.jakobniklas.adventofcode.year2019.day11.instruction.ImplementationInputInstruction;
 import de.jakobniklas.adventofcode.year2019.day11.instruction.ImplementationOutputInstruction;
 
@@ -16,11 +23,10 @@ import java.util.stream.IntStream;
 
 public class Parser
 {
+    private static Boolean debug;
     private Memory memory;
     private InstructionRegistry instructionRegistry;
     private Boolean ended;
-    private static Boolean debug;
-
     //isWhite
     private Map<Position, Boolean> panels;
     private Position robot;
@@ -55,6 +61,11 @@ public class Parser
         instructionRegistry.registerInstruction(8, new EqualsInstruction());
         instructionRegistry.registerInstruction(9, new RelativeAdjustmentInstruction());
         instructionRegistry.registerInstruction(99, new EndInstruction(() -> ended = true));
+    }
+
+    public static Boolean isDebug()
+    {
+        return debug;
     }
 
     public Integer parse(String path)
@@ -124,10 +135,14 @@ public class Parser
 
                 switch(facing)
                 {
-                    case UP: temp = Direction.LEFT; break;
-                    case DOWN: temp = Direction.RIGHT; break;
-                    case LEFT: temp = Direction.DOWN; break;
-                    case RIGHT: temp = Direction.UP; break;
+                    case UP: temp = Direction.LEFT;
+                        break;
+                    case DOWN: temp = Direction.RIGHT;
+                        break;
+                    case LEFT: temp = Direction.DOWN;
+                        break;
+                    case RIGHT: temp = Direction.UP;
+                        break;
                     default: throw new IllegalStateException("Unexpected value: " + facing);
                 }
 
@@ -139,10 +154,14 @@ public class Parser
 
                 switch(facing)
                 {
-                    case UP: temp = Direction.RIGHT; break;
-                    case DOWN: temp = Direction.LEFT; break;
-                    case LEFT: temp = Direction.UP; break;
-                    case RIGHT: temp = Direction.DOWN; break;
+                    case UP: temp = Direction.RIGHT;
+                        break;
+                    case DOWN: temp = Direction.LEFT;
+                        break;
+                    case LEFT: temp = Direction.UP;
+                        break;
+                    case RIGHT: temp = Direction.DOWN;
+                        break;
                     default: throw new IllegalStateException("Unexpected value: " + facing);
                 }
 
@@ -151,10 +170,14 @@ public class Parser
 
             switch(facing)
             {
-                case UP: robot.addY(1); break;
-                case DOWN: robot.addY(-1); break;
-                case LEFT: robot.addX(-1); break;
-                case RIGHT: robot.addX(1); break;
+                case UP: robot.addY(1);
+                    break;
+                case DOWN: robot.addY(-1);
+                    break;
+                case LEFT: robot.addX(-1);
+                    break;
+                case RIGHT: robot.addX(1);
+                    break;
             }
         }
 
@@ -171,10 +194,5 @@ public class Parser
         {
             return 0L;
         }
-    }
-
-    public static Boolean isDebug()
-    {
-        return debug;
     }
 }

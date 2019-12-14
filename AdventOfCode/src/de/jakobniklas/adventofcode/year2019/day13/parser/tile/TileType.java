@@ -11,14 +11,7 @@ public enum TileType
     HPADDLE(3),
     BALL(4);
 
-    private int id;
-
     private static Map<Integer, TileType> map = new HashMap<>();
-
-    TileType(int id)
-    {
-        this.id = id;
-    }
 
     /*
      * Fills {@link #map} on class load
@@ -29,6 +22,13 @@ public enum TileType
         {
             map.put(tileType.id, tileType);
         }
+    }
+
+    private int id;
+
+    TileType(int id)
+    {
+        this.id = id;
     }
 
     public static TileType valueOf(int id)

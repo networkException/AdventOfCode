@@ -13,6 +13,15 @@ public class Tile
         this.position = new Position(Math.toIntExact(args.get(0)), Math.toIntExact(args.get(1)));
     }
 
+    @Override
+    public String toString()
+    {
+        return "Tile{" +
+            "type=" + type +
+            ", position=" + position +
+            '}';
+    }
+
     public Position getPosition()
     {
         return position;
@@ -21,14 +30,5 @@ public class Tile
     public TileType getType()
     {
         return type;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Tile{" +
-            "type=" + type +
-            ", position=" + position +
-            '}';
     }
 }

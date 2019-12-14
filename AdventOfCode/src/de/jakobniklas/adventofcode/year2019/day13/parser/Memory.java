@@ -5,7 +5,11 @@ import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.Parameter;
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 import de.jakobniklas.applicationlib.exceptions.Exceptions;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
@@ -23,11 +27,6 @@ public class Memory
         instructionPointer = 0L;
     }
 
-    public Map<Long, Long> getValues()
-    {
-        return values;
-    }
-
     public void addToRelative(Long value)
     {
         relativeBase += value;
@@ -38,21 +37,6 @@ public class Memory
         instructionPointer += value;
     }
 
-    public void setPointer(Long instructionPointer)
-    {
-        this.instructionPointer = instructionPointer;
-    }
-
-    public Long getPointer()
-    {
-        return instructionPointer;
-    }
-
-    public Long getAtPointer()
-    {
-        return values.get(instructionPointer);
-    }
-
     public Long get(Parameter parameter)
     {
         switch(parameter.getMode())
@@ -60,7 +44,8 @@ public class Memory
             case IMMEDIATE: return parameter.getValue();
             case POSITION: return get(parameter.getValue());
             case RELATIVE: return get(relativeBase + parameter.getValue());
-            default: Exceptions.handle(new MemoryException("Cannot get value using parameter '" + parameter.toString() + "': Unknown mode")); return 0L;
+            default: Exceptions.handle(new MemoryException("Cannot get value using parameter '" + parameter.toString() + "': Unknown mode"));
+                return 0L;
         }
     }
 
@@ -75,10 +60,14 @@ public class Memory
     {
         switch(address.getMode())
         {
-            case IMMEDIATE: Exceptions.handle(new MemoryException("Cannot set value using address '" + address.toString() + "': Immediate not supported")); break;
-            case POSITION: set(address.getValue(), value); break;
-            case RELATIVE: set(relativeBase + address.getValue(), value); break;
-            default: Exceptions.handle(new MemoryException("Cannot set value using address '" + address.toString() + "': Unknown mode")); break;
+            case IMMEDIATE: Exceptions.handle(new MemoryException("Cannot set value using address '" + address.toString() + "': Immediate not supported"));
+                break;
+            case POSITION: set(address.getValue(), value);
+                break;
+            case RELATIVE: set(relativeBase + address.getValue(), value);
+                break;
+            default: Exceptions.handle(new MemoryException("Cannot set value using address '" + address.toString() + "': Unknown mode"));
+                break;
         }
     }
 
@@ -110,11 +99,6 @@ public class Memory
         }
     }
 
-    public Long getRelativeBase()
-    {
-        return relativeBase;
-    }
-
     public void loadInitial(List<Long> values)
     {
         LongStream.range(0, values.size()).forEach((i) -> this.values.put(i, values.get(Math.toIntExact(i))));
@@ -124,5 +108,30 @@ public class Memory
     {
         List<Long> values = Arrays.stream(FileUtil.getTextContent(path).replace("\n", "").split(",")).map(Long::parseLong).collect(Collectors.toList());
         LongStream.range(0, values.size()).forEach((i) -> this.values.put(i, values.get(Math.toIntExact(i))));
+    }
+
+    public Map<Long, Long> getValues()
+    {
+        return values;
+    }
+
+    public Long getPointer()
+    {
+        return instructionPointer;
+    }
+
+    public void setPointer(Long instructionPointer)
+    {
+        this.instructionPointer = instructionPointer;
+    }
+
+    public Long getAtPointer()
+    {
+        return values.get(instructionPointer);
+    }
+
+    public Long getRelativeBase()
+    {
+        return relativeBase;
     }
 }

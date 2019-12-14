@@ -3,11 +3,22 @@ package de.jakobniklas.adventofcode.year2019.day05.computer;
 import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.Instruction;
 import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.Parameter;
 import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.ParameterMode;
-import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.impl.*;
+import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.impl.AddInstruction;
+import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.impl.EqualsInstruction;
+import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.impl.JumpIfFalseInstruction;
+import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.impl.JumpIfTrueInstruction;
+import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.impl.LessThanInstruction;
+import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.impl.MultiplyInstruction;
+import de.jakobniklas.adventofcode.year2019.day05.computer.instruction.impl.OutputInstruction;
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -236,14 +247,6 @@ public class Computer
     }
 
     /**
-     * @param instructionPointer {@link #instructionPointer}
-     */
-    public void setInstructionPointer(int instructionPointer)
-    {
-        this.instructionPointer = instructionPointer;
-    }
-
-    /**
      * Adds a given value to the instructionPointer
      *
      * @param amount The given amount to add
@@ -251,5 +254,13 @@ public class Computer
     public void addToInstructionPointer(int amount)
     {
         this.instructionPointer += amount;
+    }
+
+    /**
+     * @param instructionPointer {@link #instructionPointer}
+     */
+    public void setInstructionPointer(int instructionPointer)
+    {
+        this.instructionPointer = instructionPointer;
     }
 }

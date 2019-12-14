@@ -19,9 +19,12 @@ public class ConsoleOutputInstruction extends Instruction
     {
         switch(parameters.get(0).getMode())
         {
-            case POSITION: Log.print("Parser", String.format("Value at address '%d' is '%d'", parameters.get(0).getValue(), memory.get(parameters.get(0)))); break;
-            case IMMEDIATE: Log.print("Parser", String.format("Value is '%d'", memory.get(parameters.get(0)))); break;
-            case RELATIVE: Log.print("Parser", String.format("Value '%d' relative to '%d' is '%d'", parameters.get(0).getValue(), memory.getRelativeBase(), memory.get(parameters.get(0)))); break;
+            case POSITION: Log.print("Parser", String.format("Value at address '%d' is '%d'", parameters.get(0).getValue(), memory.get(parameters.get(0))));
+                break;
+            case IMMEDIATE: Log.print("Parser", String.format("Value is '%d'", memory.get(parameters.get(0))));
+                break;
+            case RELATIVE: Log.print("Parser", String.format("Value '%d' relative to '%d' is '%d'", parameters.get(0).getValue(), memory.getRelativeBase(), memory.get(parameters.get(0))));
+                break;
         }
     }
 }

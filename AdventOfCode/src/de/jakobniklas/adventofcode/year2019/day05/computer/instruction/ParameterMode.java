@@ -20,8 +20,8 @@ public enum ParameterMode
 {
     /**
      * The value of an argument will be interpreted as a pointer to a memory address. The output value from {@link
-     * de.jakobniklas.adventofcode.year2019.day05.computer.Computer#getParameter(Parameter) Computer#getParameter(Parameter)}
-     * will return the value at that position
+     * de.jakobniklas.adventofcode.year2019.day05.computer.Computer#getParameter(Parameter)
+     * Computer#getParameter(Parameter)} will return the value at that position
      */
     POSITION(0),
 
@@ -31,24 +31,9 @@ public enum ParameterMode
     IMMEDIATE(1);
 
     /**
-     * The id of the parameterMode (as specified in the opcode)
-     */
-    private int id;
-
-    /**
      * A map of ids and their modes
      */
     private static Map<Integer, ParameterMode> map = new HashMap<>();
-
-    /**
-     * The enum constructor, defining that every mode has an id
-     *
-     * @param id The id of the mode
-     */
-    ParameterMode(int id)
-    {
-        this.id = id;
-    }
 
     /*
      * Fills {@link #map} on class load
@@ -59,6 +44,21 @@ public enum ParameterMode
         {
             map.put(pageType.id, pageType);
         }
+    }
+
+    /**
+     * The id of the parameterMode (as specified in the opcode)
+     */
+    private int id;
+
+    /**
+     * The enum constructor, defining that every mode has an id
+     *
+     * @param id The id of the mode
+     */
+    ParameterMode(int id)
+    {
+        this.id = id;
     }
 
     /**

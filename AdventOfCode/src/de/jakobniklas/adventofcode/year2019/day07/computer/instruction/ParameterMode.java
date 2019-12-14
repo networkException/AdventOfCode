@@ -32,24 +32,9 @@ public enum ParameterMode
     IMMEDIATE(1);
 
     /**
-     * The id of the parameterMode (as specified in the opcode)
-     */
-    private int id;
-
-    /**
      * A map of ids and their modes
      */
     private static Map<Integer, ParameterMode> map = new HashMap<>();
-
-    /**
-     * The enum constructor, defining that every mode has an id
-     *
-     * @param id The id of the mode
-     */
-    ParameterMode(int id)
-    {
-        this.id = id;
-    }
 
     /*
      * Fills {@link #map} on class load
@@ -60,6 +45,21 @@ public enum ParameterMode
         {
             map.put(pageType.id, pageType);
         }
+    }
+
+    /**
+     * The id of the parameterMode (as specified in the opcode)
+     */
+    private int id;
+
+    /**
+     * The enum constructor, defining that every mode has an id
+     *
+     * @param id The id of the mode
+     */
+    ParameterMode(int id)
+    {
+        this.id = id;
     }
 
     /**

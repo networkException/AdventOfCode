@@ -17,28 +17,10 @@ public class SpaceObject
         this.spaceObject = spaceObject;
     }
 
-    public String getParent()
-    {
-        return parent;
-    }
-
-    public String getSpaceObject()
-    {
-        return spaceObject;
-    }
-
-    public List<SpaceObject> getTrace()
-    {
-        return trace;
-    }
-
     @Override
-    public String toString()
+    public int hashCode()
     {
-        return "SpaceObject{" +
-            "parent='" + parent + '\'' +
-            ", spaceObject='" + spaceObject + '\'' +
-            '}';
+        return Objects.hash(parent, spaceObject);
     }
 
     @Override
@@ -52,8 +34,26 @@ public class SpaceObject
     }
 
     @Override
-    public int hashCode()
+    public String toString()
     {
-        return Objects.hash(parent, spaceObject);
+        return "SpaceObject{" +
+            "parent='" + parent + '\'' +
+            ", spaceObject='" + spaceObject + '\'' +
+            '}';
+    }
+
+    public String getParent()
+    {
+        return parent;
+    }
+
+    public String getSpaceObject()
+    {
+        return spaceObject;
+    }
+
+    public List<SpaceObject> getTrace()
+    {
+        return trace;
     }
 }

@@ -13,33 +13,10 @@ public class Position
         this.y = y;
     }
 
-    public Integer getX()
-    {
-        return x;
-    }
-
-    public Integer getY()
-    {
-        return y;
-    }
-
-    public void setY(Integer y)
-    {
-        this.y = y;
-    }
-
-    public void setX(Integer x)
-    {
-        this.x = x;
-    }
-
     @Override
-    public String toString()
+    public int hashCode()
     {
-        return "Position{" +
-            "x=" + x +
-            ", y=" + y +
-            '}';
+        return Objects.hash(x, y);
     }
 
     @Override
@@ -53,8 +30,31 @@ public class Position
     }
 
     @Override
-    public int hashCode()
+    public String toString()
     {
-        return Objects.hash(x, y);
+        return "Position{" +
+            "x=" + x +
+            ", y=" + y +
+            '}';
+    }
+
+    public Integer getX()
+    {
+        return x;
+    }
+
+    public void setX(Integer x)
+    {
+        this.x = x;
+    }
+
+    public Integer getY()
+    {
+        return y;
+    }
+
+    public void setY(Integer y)
+    {
+        this.y = y;
     }
 }

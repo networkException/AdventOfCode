@@ -13,25 +13,6 @@ public class Position
         this.y = y;
     }
 
-    public Integer getX()
-    {
-        return x;
-    }
-
-    public Integer getY()
-    {
-        return y;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Position{" +
-            "x=" + x +
-            ", y=" + y +
-            '}';
-    }
-
     public Boolean isDirectNeighbour(Position position)
     {
         return eitherOneOrZero(position.getX() - x) && eitherOneOrZero(position.getY() - y);
@@ -47,6 +28,12 @@ public class Position
     }
 
     @Override
+    public int hashCode()
+    {
+        return Objects.hash(x, y);
+    }
+
+    @Override
     public boolean equals(Object o)
     {
         if(this == o) return true;
@@ -57,8 +44,21 @@ public class Position
     }
 
     @Override
-    public int hashCode()
+    public String toString()
     {
-        return Objects.hash(x, y);
+        return "Position{" +
+            "x=" + x +
+            ", y=" + y +
+            '}';
+    }
+
+    public Integer getX()
+    {
+        return x;
+    }
+
+    public Integer getY()
+    {
+        return y;
     }
 }

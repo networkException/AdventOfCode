@@ -36,6 +36,16 @@ public class Wire
     }
 
     /**
+     * Adds a given amount of steps to the point's steps
+     *
+     * @param steps {@link #steps}
+     */
+    public void addSteps(int steps)
+    {
+        this.steps += steps;
+    }
+
+    /**
      * @return {@link #wireId}
      */
     public int getWireId()
@@ -57,15 +67,5 @@ public class Wire
     public void setSteps(int steps)
     {
         this.steps = steps;
-    }
-
-    /**
-     * Adds a given amount of steps to the point's steps
-     *
-     * @param steps {@link #steps}
-     */
-    public void addSteps(int steps)
-    {
-        this.steps += steps;
     }
 }

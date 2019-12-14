@@ -11,11 +11,6 @@ public class Pixel
         this.white = white;
     }
 
-    public Coordinate getCoordinate()
-    {
-        return coordinate;
-    }
-
     public Boolean isWhite()
     {
         return white;
@@ -28,5 +23,10 @@ public class Pixel
             "coordinate=" + coordinate +
             ", white=" + white +
             '}';
+    }
+
+    public Coordinate getCoordinate()
+    {
+        return coordinate;
     }
 }

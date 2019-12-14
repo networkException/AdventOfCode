@@ -89,11 +89,6 @@ public class MoonSystem
         callisto.applyGravity();
     }
 
-    public Integer getTotalEnergy()
-    {
-        return io.getEnergy() + europa.getEnergy() + ganymede.getEnergy() + callisto.getEnergy();
-    }
-
     @Override
     public boolean equals(Object o)
     {
@@ -104,11 +99,6 @@ public class MoonSystem
             Objects.equals(europa, that.europa) &&
             Objects.equals(ganymede, that.ganymede) &&
             Objects.equals(callisto, that.callisto);
-    }
-
-    public String stringCode()
-    {
-        return String.format("%s%s%s%s", io.stringCode(), europa.stringCode(), ganymede.stringCode(), callisto.stringCode());
     }
 
     @Override
@@ -124,5 +114,15 @@ public class MoonSystem
             ", ganymedeInitial='" + ganymedeInitial + '\'' +
             ", callistoInitial='" + callistoInitial + '\'' +
             '}';
+    }
+
+    public String stringCode()
+    {
+        return String.format("%s%s%s%s", io.stringCode(), europa.stringCode(), ganymede.stringCode(), callisto.stringCode());
+    }
+
+    public Integer getTotalEnergy()
+    {
+        return io.getEnergy() + europa.getEnergy() + ganymede.getEnergy() + callisto.getEnergy();
     }
 }

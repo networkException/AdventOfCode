@@ -36,6 +36,18 @@ public class Parameter
     }
 
     /**
+     * @return A string interpretation of the object
+     */
+    @Override
+    public String toString()
+    {
+        return "{" +
+            "mode=" + mode +
+            ", value=" + value +
+            '}';
+    }
+
+    /**
      * @return {@link #mode}
      */
     public ParameterMode getMode()
@@ -49,17 +61,5 @@ public class Parameter
     public Integer getValue()
     {
         return value;
-    }
-
-    /**
-     * @return A string interpretation of the object
-     */
-    @Override
-    public String toString()
-    {
-        return "{" +
-            "mode=" + mode +
-            ", value=" + value +
-            '}';
     }
 }

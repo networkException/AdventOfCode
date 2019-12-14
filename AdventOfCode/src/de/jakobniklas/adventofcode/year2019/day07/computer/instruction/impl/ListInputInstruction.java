@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class ListInputInstruction extends Instruction
 {
+    private static int pointer = 0;
+
     /**
      * Takes one parameter. The value at the address of the first parameter (always position mode) will be set to an
      * integer value given by the a list of value. This instruction will get a value from the list of integers. The
@@ -29,8 +31,6 @@ public class ListInputInstruction extends Instruction
             pointer++;
         });
     }
-
-    private static int pointer = 0;
 
     public static void resetPointer()
     {

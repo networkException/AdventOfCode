@@ -1,15 +1,23 @@
 package de.jakobniklas.adventofcode.year2019.day09.parser;
 
 import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.InstructionRegistry;
-import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.*;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.AddInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.EndInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.EqualsInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.ImplementationInputInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.ImplementationOutputInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.JumpIfFalseInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.JumpIfTrueInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.LessThanInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.MultiplyInstruction;
+import de.jakobniklas.adventofcode.year2019.day09.parser.instruction.impl.RelativeAdjustmentInstruction;
 
 public class Parser
 {
+    public static Boolean debug;
     private Memory memory;
     private InstructionRegistry instructionRegistry;
     private Boolean ended;
-    public static Boolean debug;
-
     private Long output;
 
     public Parser(Boolean debug, Long mode)
@@ -31,6 +39,11 @@ public class Parser
         instructionRegistry.registerInstruction(99, new EndInstruction(() -> ended = true));
     }
 
+    public static Boolean isDebug()
+    {
+        return debug;
+    }
+
     public Long parse(String path)
     {
         memory.loadInitial(path);
@@ -41,10 +54,5 @@ public class Parser
         }
 
         return output;
-    }
-
-    public static Boolean isDebug()
-    {
-        return debug;
     }
 }

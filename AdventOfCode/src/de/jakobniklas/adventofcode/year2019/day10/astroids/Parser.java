@@ -2,7 +2,12 @@ package de.jakobniklas.adventofcode.year2019.day10.astroids;
 
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;

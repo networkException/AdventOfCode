@@ -13,23 +13,10 @@ public class Coordinate
         this.v = v;
     }
 
-    public Integer getU()
-    {
-        return u;
-    }
-
-    public Integer getV()
-    {
-        return v;
-    }
-
     @Override
-    public String toString()
+    public int hashCode()
     {
-        return "Coordinate{" +
-            "u=" + u +
-            ", v=" + v +
-            '}';
+        return Objects.hash(u, v);
     }
 
     @Override
@@ -43,8 +30,21 @@ public class Coordinate
     }
 
     @Override
-    public int hashCode()
+    public String toString()
     {
-        return Objects.hash(u, v);
+        return "Coordinate{" +
+            "u=" + u +
+            ", v=" + v +
+            '}';
+    }
+
+    public Integer getU()
+    {
+        return u;
+    }
+
+    public Integer getV()
+    {
+        return v;
     }
 }

@@ -13,16 +13,6 @@ public class Position
         this.y = y;
     }
 
-    public int getX()
-    {
-        return x;
-    }
-
-    public int getY()
-    {
-        return y;
-    }
-
     public void addX(int x)
     {
         this.x += x;
@@ -34,12 +24,9 @@ public class Position
     }
 
     @Override
-    public String toString()
+    public int hashCode()
     {
-        return "Position{" +
-            "x=" + x +
-            ", y=" + y +
-            '}';
+        return Objects.hash(x, y);
     }
 
     @Override
@@ -53,8 +40,21 @@ public class Position
     }
 
     @Override
-    public int hashCode()
+    public String toString()
     {
-        return Objects.hash(x, y);
+        return "Position{" +
+            "x=" + x +
+            ", y=" + y +
+            '}';
+    }
+
+    public int getX()
+    {
+        return x;
+    }
+
+    public int getY()
+    {
+        return y;
     }
 }

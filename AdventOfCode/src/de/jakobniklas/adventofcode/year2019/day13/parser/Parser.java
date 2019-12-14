@@ -3,24 +3,37 @@ package de.jakobniklas.adventofcode.year2019.day13.parser;
 import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.InstructionRegistry;
 import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.Parameter;
 import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.ParameterMode;
-import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.*;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.AddInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.EndInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.EqualsInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.ImplementationInputInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.ImplementationOutputInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.JumpIfFalseInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.JumpIfTrueInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.LessThanInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.MultiplyInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.RelativeAdjustmentInstruction;
+import de.jakobniklas.adventofcode.year2019.day13.parser.instruction.impl.ScannerInputInstruction;
 import de.jakobniklas.adventofcode.year2019.day13.parser.tile.Position;
 import de.jakobniklas.adventofcode.year2019.day13.parser.tile.Tile;
 import de.jakobniklas.adventofcode.year2019.day13.parser.tile.TileType;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Parser
 {
+    public static Boolean debug;
     private Memory memory;
     private InstructionRegistry instructionRegistry;
     private Boolean ended;
-    public static Boolean debug;
-
     private List<Long> outputs;
     private Map<Position, Tile> tiles;
 
@@ -44,6 +57,11 @@ public class Parser
         instructionRegistry.registerInstruction(8, new EqualsInstruction());
         instructionRegistry.registerInstruction(9, new RelativeAdjustmentInstruction());
         instructionRegistry.registerInstruction(99, new EndInstruction(() -> ended = true));
+    }
+
+    public static Boolean isDebug()
+    {
+        return debug;
     }
 
     public Long part1(String path)
@@ -148,11 +166,16 @@ public class Parser
 
                         switch(tile.getType())
                         {
-                            case BLOCK: out.set("B"); break;
-                            case BALL: out.set("O"); break;
-                            case WALL: out.set("W"); break;
-                            case EMPTY: out.set(" "); break;
-                            case HPADDLE: out.set("P"); break;
+                            case BLOCK: out.set("B");
+                                break;
+                            case BALL: out.set("O");
+                                break;
+                            case WALL: out.set("W");
+                                break;
+                            case EMPTY: out.set(" ");
+                                break;
+                            case HPADDLE: out.set("P");
+                                break;
                         }
                     }
                 });
@@ -162,10 +185,5 @@ public class Parser
 
             System.out.println();
         });
-    }
-
-    public static Boolean isDebug()
-    {
-        return debug;
     }
 }

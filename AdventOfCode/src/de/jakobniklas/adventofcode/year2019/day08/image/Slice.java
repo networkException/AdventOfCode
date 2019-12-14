@@ -19,16 +19,6 @@ public class Slice
         pixels.add(pixel);
     }
 
-    public List<Integer> getPixels()
-    {
-        return pixels;
-    }
-
-    public Coordinate getCoordinate()
-    {
-        return coordinate;
-    }
-
     public Pixel processSlice()
     {
         for(Integer pixel : getPixels())
@@ -50,5 +40,15 @@ public class Slice
             "coordinate=" + coordinate +
             ", pixels=" + pixels +
             '}';
+    }
+
+    public List<Integer> getPixels()
+    {
+        return pixels;
+    }
+
+    public Coordinate getCoordinate()
+    {
+        return coordinate;
     }
 }

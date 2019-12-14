@@ -37,10 +37,12 @@ public class Amplifiers
             switch(aInputPointer.get())
             {
                 //First round, phase input
-                case 0: ampA.setValue(parameters.get(0).getValue(), phaseA); break;
+                case 0: ampA.setValue(parameters.get(0).getValue(), phaseA);
+                    break;
 
                 //First round, amplifier's input value
-                case 1: ampA.setValue(parameters.get(0).getValue(), 0); break;
+                case 1: ampA.setValue(parameters.get(0).getValue(), 0);
+                    break;
 
                 //Output from ampE
                 default: ampA.setValue(parameters.get(0).getValue(), lastOutput.get());
@@ -54,7 +56,8 @@ public class Amplifiers
             switch(bInputPointer.get())
             {
                 //First round, phase input
-                case 0: ampB.setValue(parameters.get(0).getValue(), phaseB); break;
+                case 0: ampB.setValue(parameters.get(0).getValue(), phaseB);
+                    break;
 
                 //Output from ampA
                 default: ampB.setValue(parameters.get(0).getValue(), lastOutput.get());
@@ -68,7 +71,8 @@ public class Amplifiers
             switch(cInputPointer.get())
             {
                 //First round, phase input
-                case 0: ampC.setValue(parameters.get(0).getValue(), phaseC); break;
+                case 0: ampC.setValue(parameters.get(0).getValue(), phaseC);
+                    break;
 
                 //Output from ampB
                 default: ampC.setValue(parameters.get(0).getValue(), lastOutput.get());
@@ -82,7 +86,8 @@ public class Amplifiers
             switch(dInputPointer.get())
             {
                 //First round, phase input
-                case 0: ampD.setValue(parameters.get(0).getValue(), phaseD); break;
+                case 0: ampD.setValue(parameters.get(0).getValue(), phaseD);
+                    break;
 
                 //Output from ampC
                 default: ampD.setValue(parameters.get(0).getValue(), lastOutput.get());
@@ -96,7 +101,8 @@ public class Amplifiers
             switch(eInputPointer.get())
             {
                 //First round, phase input
-                case 0: ampE.setValue(parameters.get(0).getValue(), phaseE); break;
+                case 0: ampE.setValue(parameters.get(0).getValue(), phaseE);
+                    break;
 
                 //Output from ampD
                 default: ampE.setValue(parameters.get(0).getValue(), lastOutput.get());

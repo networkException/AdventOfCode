@@ -4,7 +4,11 @@ import de.jakobniklas.adventofcode.year2019.day09.parser.Memory;
 import de.jakobniklas.adventofcode.year2019.day09.parser.Parser;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 

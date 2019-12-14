@@ -2,7 +2,12 @@ package de.jakobniklas.adventofcode.year2019.day03.grid;
 
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -105,13 +110,17 @@ public class Grid
                     switch(instruction.substring(0, 1))
                     {
                         case "L":
-                            xr.set(xr.get() - 1); break;
+                            xr.set(xr.get() - 1);
+                            break;
                         case "R":
-                            xr.set(xr.get() + 1); break;
+                            xr.set(xr.get() + 1);
+                            break;
                         case "D":
-                            yr.set(yr.get() - 1); break;
+                            yr.set(yr.get() - 1);
+                            break;
                         case "U":
-                            yr.set(yr.get() + 1); break;
+                            yr.set(yr.get() + 1);
+                            break;
                     }
 
                     steps.getAndIncrement();

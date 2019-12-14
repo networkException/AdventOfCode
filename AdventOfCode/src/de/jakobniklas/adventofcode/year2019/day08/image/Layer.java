@@ -39,11 +39,6 @@ public class Layer
         return pixelCounts.get(pixel).get();
     }
 
-    public Map<Coordinate, Integer> getPixels()
-    {
-        return pixels;
-    }
-
     @Override
     public String toString()
     {
@@ -51,5 +46,10 @@ public class Layer
             "pixelCounts=" + pixelCounts +
             ", pixels=" + pixels +
             '}';
+    }
+
+    public Map<Coordinate, Integer> getPixels()
+    {
+        return pixels;
     }
 }

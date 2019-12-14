@@ -13,41 +13,6 @@ public class Position
 
     }
 
-    public Integer getPotentialEnergy()
-    {
-        return Math.abs(x) + Math.abs(y) + Math.abs(z);
-    }
-
-    public Integer getX()
-    {
-        return x;
-    }
-
-    public Integer getY()
-    {
-        return y;
-    }
-
-    public Integer getZ()
-    {
-        return z;
-    }
-
-    public void setX(Integer x)
-    {
-        this.x = x;
-    }
-
-    public void setY(Integer y)
-    {
-        this.y = y;
-    }
-
-    public void setZ(Integer z)
-    {
-        this.z = z;
-    }
-
     public void addToX(Integer x)
     {
         this.x += x;
@@ -64,16 +29,6 @@ public class Position
     }
 
     @Override
-    public String toString()
-    {
-        return "Gravity{" +
-            "x=" + x +
-            ", y=" + y +
-            ", z=" + z +
-            '}';
-    }
-
-    @Override
     public boolean equals(Object o)
     {
         if(this == o) return true;
@@ -84,8 +39,53 @@ public class Position
             Objects.equals(z, position.z);
     }
 
+    @Override
+    public String toString()
+    {
+        return "Gravity{" +
+            "x=" + x +
+            ", y=" + y +
+            ", z=" + z +
+            '}';
+    }
+
     public String stringCode()
     {
         return String.format("%d%d%d", x, y, z);
+    }
+
+    public Integer getPotentialEnergy()
+    {
+        return Math.abs(x) + Math.abs(y) + Math.abs(z);
+    }
+
+    public Integer getX()
+    {
+        return x;
+    }
+
+    public void setX(Integer x)
+    {
+        this.x = x;
+    }
+
+    public Integer getY()
+    {
+        return y;
+    }
+
+    public void setY(Integer y)
+    {
+        this.y = y;
+    }
+
+    public Integer getZ()
+    {
+        return z;
+    }
+
+    public void setZ(Integer z)
+    {
+        this.z = z;
     }
 }

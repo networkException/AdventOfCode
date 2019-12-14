@@ -15,6 +15,7 @@ import de.jakobniklas.adventofcode.year2019.day10.Day10;
 import de.jakobniklas.adventofcode.year2019.day11.Day11;
 import de.jakobniklas.adventofcode.year2019.day12.Day12;
 import de.jakobniklas.adventofcode.year2019.day13.Day13;
+import de.jakobniklas.adventofcode.year2019.day14.Day14;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -41,6 +42,7 @@ public class Main
                 days.put(11, new Day11());
                 days.put(12, new Day12());
                 days.put(13, new Day13());
+                days.put(14, new Day14());
             }
         };
     }

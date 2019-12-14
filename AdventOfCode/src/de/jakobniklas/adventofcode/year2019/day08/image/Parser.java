@@ -51,16 +51,6 @@ public class Parser
         }));
     }
 
-    public int getPartOneResult()
-    {
-        Layer targetLayer = layers.stream()
-            .sorted(Comparator.comparingInt(a -> a.pixelCount(0)))
-            .collect(Collectors.toList())
-            .get(0);
-
-        return targetLayer.pixelCount(1) * targetLayer.pixelCount(2);
-    }
-
     public void printPartTwo(int x, int y)
     {
         List<Pixel> pixels = new ArrayList<>();
@@ -89,5 +79,15 @@ public class Parser
             xPrint.set(0);
             yPrint.getAndIncrement();
         });
+    }
+
+    public int getPartOneResult()
+    {
+        Layer targetLayer = layers.stream()
+            .sorted(Comparator.comparingInt(a -> a.pixelCount(0)))
+            .collect(Collectors.toList())
+            .get(0);
+
+        return targetLayer.pixelCount(1) * targetLayer.pixelCount(2);
     }
 }

@@ -8,12 +8,12 @@ public abstract class Instruction
 {
     protected Memory memory;
 
+    public abstract Integer parameterCount();
+
+    public abstract void run(List<Parameter> parameters);
+
     void setMemory(Memory memory)
     {
         this.memory = memory;
     }
-
-    public abstract Integer parameterCount();
-
-    public abstract void run(List<Parameter> parameters);
 }

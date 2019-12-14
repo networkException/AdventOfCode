@@ -17,11 +17,6 @@ public class Moon
         velocity = new Velocity();
     }
 
-    public Integer getEnergy()
-    {
-        return position.getPotentialEnergy() * velocity.getKineticEnergy();
-    }
-
     public void applyGravity()
     {
         position.addToX(velocity.getX());
@@ -75,15 +70,6 @@ public class Moon
     }
 
     @Override
-    public String toString()
-    {
-        return "Moon{" +
-            "position=" + position +
-            ", velocity=" + velocity +
-            '}';
-    }
-
-    @Override
     public boolean equals(Object o)
     {
         if(this == o) return true;
@@ -91,6 +77,15 @@ public class Moon
         Moon moon = (Moon) o;
         return Objects.equals(position, moon.position) &&
             Objects.equals(velocity, moon.velocity);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Moon{" +
+            "position=" + position +
+            ", velocity=" + velocity +
+            '}';
     }
 
     public String stringCode()
@@ -101,5 +96,10 @@ public class Moon
     public Boolean zeroVelocity()
     {
         return velocity.isZero();
+    }
+
+    public Integer getEnergy()
+    {
+        return position.getPotentialEnergy() * velocity.getKineticEnergy();
     }
 }
