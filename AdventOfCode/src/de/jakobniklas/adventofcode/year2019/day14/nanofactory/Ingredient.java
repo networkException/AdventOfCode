@@ -5,12 +5,17 @@ import java.util.Objects;
 public class Ingredient
 {
     private String name;
-    private Integer amount;
+    private Double amount;
 
     public Ingredient(String toParse)
     {
         name = toParse.split(" ")[1];
-        amount = Integer.parseInt(toParse.split(" ")[0]);
+        amount = Double.parseDouble(toParse.split(" ")[0]);
+    }
+
+    public void divideAmount(Double outputAmount)
+    {
+        amount /= outputAmount;
     }
 
     @Override
@@ -38,7 +43,7 @@ public class Ingredient
             '}';
     }
 
-    public Integer getAmount()
+    public Double getAmount()
     {
         return amount;
     }

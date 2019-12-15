@@ -24,8 +24,8 @@ public class Parser
 
     public void part1()
     {
-        Map<String, Integer> required = new HashMap<>();
-        Map<String, Integer> leftOver = new HashMap<>();
+        Map<String, Double> required = new HashMap<>();
+        Map<String, Double> leftOver = new HashMap<>();
 
         //Get all direct ingredients for FUEL
         getReaction("FUEL").getIngredients().forEach((ingredient) -> required.put(ingredient.getName(), ingredient.getAmount()));
@@ -33,8 +33,6 @@ public class Parser
         //While all the ingredients are not traced back to ORE
         while(required.size() > 1)
         {
-            Log.print(required.toString());
-
             //Iterate threw each currently required ingredient
             new HashMap<>(required).forEach((name, amount) ->
             {
@@ -44,8 +42,10 @@ public class Parser
                 //For every superIngredient of a currently required one
                 getReaction(name).getIngredients().forEach((ingredient) ->
                 {
+                    double requiredAmount = amount * ingredient.getAmount();
+
                     //There is enough of the required ingredient left over from a previous reaction
-                    if(ingredient.getAmount() <= leftOver.getOrDefault(ingredient.getName(), 0))
+                    if(requiredAmount <= leftOver.getOrDefault(ingredient.getName(), 0D))
                     {
                         //Subtract the needed left over amount
                         leftOver.replace(ingredient.getName(), leftOver.get(ingredient.getName()) - ingredient.getAmount());
@@ -55,14 +55,15 @@ public class Parser
                     {
                         //get(0) -> Minimal amount of ingredient required
                         //get(1) -> Difference
-                        List<Integer> amounts = minAmount(ingredient.getAmount(), amount);
+                        //List<Integer> amounts = minAmount(ingredient.getAmount(), requiredAmount);
 
-                        replaceOrPut(required, ingredient.getName(), required.getOrDefault(ingredient.getName(), 0) + amounts.get(0));
-                        replaceOrPut(leftOver, name, leftOver.getOrDefault(name, 0) + amounts.get(1));
+                        replaceOrPut(required, ingredient.getName(), required.getOrDefault(ingredient.getName(), 0D) + requiredAmount);
                     }
 
                     //No required anymore
                     required.remove(name);
+
+                    Log.print(required.toString());
                 });
             });
         }

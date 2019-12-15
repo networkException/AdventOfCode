@@ -18,6 +18,12 @@ public class Reaction
 
         Arrays.asList(inputs.split(", ")).forEach((input) -> ingredients.add(new Ingredient(input)));
         this.output = new Ingredient(output);
+
+        if(getOutput().getAmount() != 1)
+        {
+            ingredients.forEach((ingredient) -> ingredient.divideAmount(getOutput().getAmount()));
+            getOutput().divideAmount(getOutput().getAmount());
+        }
     }
 
     @Override
