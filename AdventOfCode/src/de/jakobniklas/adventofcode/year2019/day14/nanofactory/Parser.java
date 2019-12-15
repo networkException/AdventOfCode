@@ -3,7 +3,6 @@ package de.jakobniklas.adventofcode.year2019.day14.nanofactory;
 import de.jakobniklas.applicationlib.commonutil.FileUtil;
 import de.jakobniklas.applicationlib.commonutil.Log;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +41,13 @@ public class Parser
                 //For every superIngredient of a currently required one
                 getReaction(name).getIngredients().forEach((ingredient) ->
                 {
-                    double requiredAmount = amount * ingredient.getAmount();
+                    Log.print(required.toString());
+
+                    //Get amount required for the given element
+                    List<Double> amounts = calculateAmount(ingredient, getReaction(name).getOutput(), amount);
+
+                    double requiredAmount = amounts.get(0);
+                    double leftOverAmount = amounts.get(1);
 
                     //There is enough of the required ingredient left over from a previous reaction
                     if(requiredAmount <= leftOver.getOrDefault(ingredient.getName(), 0D))
@@ -58,12 +63,11 @@ public class Parser
                         //List<Integer> amounts = minAmount(ingredient.getAmount(), requiredAmount);
 
                         replaceOrPut(required, ingredient.getName(), required.getOrDefault(ingredient.getName(), 0D) + requiredAmount);
+                        replaceOrPut(leftOver, name, leftOver.getOrDefault(name, 0D) + leftOverAmount);
                     }
 
                     //No required anymore
                     required.remove(name);
-
-                    Log.print(required.toString());
                 });
             });
         }
@@ -72,27 +76,39 @@ public class Parser
     }
 
     /*
-        Source = 10
-        Target = 7
-        Output = 10
+        9 ORE => 2 A
+        Need: 10 A
+        Use: 45 ORE
+        Left over: 0 A
 
-        Source = 10
-        Target = 14
-        Output = 20
+        Need: 11 A
+        Use: 49 ORE
+        Left over: 1 A
      */
-    private List<Integer> minAmount(Integer source, Integer target)
+    private List<Double> calculateAmount(Ingredient ingredient, Ingredient output, Double outputAmount)
     {
-        List<Integer> output = new ArrayList<>();
+        Log.print("Ingredient", ingredient.toString());
+        Log.print("Output", output.toString());
+        Log.print("OutputAmount", outputAmount.toString());
 
-        while(source < target)
+        if(output.getAmount() == 1)
         {
-            source += source;
+            Log.print("Using", String.valueOf(outputAmount * ingredient.getAmount()));
+            Log.print("Left", String.valueOf(outputAmount * ingredient.getAmount() - outputAmount));
+            return Arrays.asList(outputAmount * ingredient.getAmount(), outputAmount * ingredient.getAmount() - outputAmount);
         }
+        else
+        {
+            int multiply = 1;
+            while(output.getAmount() * multiply < outputAmount)
+            {
+                multiply++;
+            }
 
-        output.add(source);
-        output.add(source - target);
-
-        return output;
+            Log.print("Using", String.valueOf(multiply * ingredient.getAmount()));
+            Log.print("Left", String.valueOf(multiply * ingredient.getAmount() - outputAmount));
+            return Arrays.asList(multiply * ingredient.getAmount(), multiply * ingredient.getAmount() - outputAmount);
+        }
     }
 
     private <K, V> void replaceOrPut(Map<K, V> input, K key, V value)
