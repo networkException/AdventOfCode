@@ -5,7 +5,7 @@
 [![Stars](https://img.shields.io/badge/Stars-0-yellow)](https://github.com/dejakobniklas/AdventOfCode/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-networkException's Advent of Code challenges
+networkException's Advent of Code solutions
 
 ### Check out other solutions :D
 + Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code)
