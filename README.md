@@ -8,13 +8,8 @@
 networkException's Advent of Code solutions
 
 ### Check out other solutions :D
-+ Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code)
-+ Trojaner's [AdventofCode](https://github.com/TrojanerHD/AdventofCode)
-+ derNiklaas' [Advent-of-Code-2019](https://github.com/derNiklaas/Advent-of-Code-2019)
-+ LeMoonStar's [AdventOfCode2019Solutions](https://github.com/LeMoonStar/AdventOfCode2019Solutions)
-+ DCDragonCoder's [AdventOfCode2019](https://github.com/DragonCoder01/AdventOfCode2019)
-+ joblo2213's [AdventOfCode2019](https://github.com/joblo2213/AdventOfCode2019)
-+ FeldiM's [AdventOfCode19](https://github.com/feldim2425/AdventOfCode19)
-+ derkalaender's [AdventOfCode](https://github.com/derkalaender/AdventOfCode)
-+ Daan Breur's [AdventodCode2019](https://github.com/daanbreur/AdventofCode2019)
-+ 1Turtle's [AdventOfCode-for-Computercraft](https://github.com/1Turtle/AdventOfCode-for-Computercraft)
+*None yet because their repositories might change*
+
+### Previous years
+
+- 2019 at commit `d2caac4eb16442af3da2e88affa40ae5af6e81d` ([view on github](https://github.com/networkException/AdventOfCode/tree/d2caac4eb16442af3da2e88affa40ae5af6e81d4))
