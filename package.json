@@ -1,0 +1,23 @@
+{
+	"name": "adventofcode",
+	"version": "0.0.0",
+	"description": "networkException's Advent of Code solutions",
+	"main": "index.js",
+	"scripts": {
+		"day1": "tsc -p tsconfig.json && node day1.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/networkException/AdventOfCode.git"
+	},
+	"keywords": [
+		"adventofcode",
+		"typescript"
+	],
+	"author": "networkException",
+	"license": "GPL-3.0-or-later",
+	"bugs": {
+		"url": "https://github.com/networkException/AdventOfCode/issues"
+	},
+	"homepage": "https://github.com/networkException/AdventOfCode#readme"
+}
