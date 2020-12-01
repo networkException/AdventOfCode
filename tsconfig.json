@@ -4,13 +4,11 @@
         "target": "esnext",
         "esModuleInterop": true,
         "sourceMap": true,
+        "rootDir": ".",
         "typeRoots": [
             "./node_modules/@types"
         ]
     },
-    "files": [
-        "index.ts"
-    ],
     "exclude": [
         "node_modules"
     ]
