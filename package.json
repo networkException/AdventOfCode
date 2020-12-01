@@ -19,5 +19,8 @@
 	"bugs": {
 		"url": "https://github.com/networkException/AdventOfCode/issues"
 	},
-	"homepage": "https://github.com/networkException/AdventOfCode#readme"
+	"homepage": "https://github.com/networkException/AdventOfCode#readme",
+	"dependencies": {
+		"@types/node": "^14.14.10"
+	}
 }
