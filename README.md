@@ -22,4 +22,5 @@ networkException's Advent of Code solutions
 + derNiklaas' [AoC-2020](https://github.com/derNiklaas/AoC-2020)
 + LeMoonStars's [AoC20](https://github.com/LeMoonStar/AoC20/)
 + Sammy's [AoC20](https://github.com/1Turtle/AoC20)
++ syncopsta's [aoc_2020](https://github.com/syncopsta/aoc_2020)
 + Trojaner's [AdventofCode2020](https://github.com/TrojanerHD/AdventofCode2020)
