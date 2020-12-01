@@ -1,0 +1,12 @@
+# editor
+.idea
+.vscode
+
+# dependencies
+node_modules
+package-lock.json
+pnpm-lock.yaml
+
+# build files
+*.js
+*.js.map
