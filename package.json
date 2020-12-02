@@ -4,7 +4,8 @@
 	"description": "networkException's Advent of Code solutions",
 	"main": "index.js",
 	"scripts": {
-		"day1": "tsc -p tsconfig.json && node day1.js"
+		"day1": "tsc -p tsconfig.json && node day1.js",
+		"day2": "tsc -p tsconfig.json && node day2.js"
 	},
 	"repository": {
 		"type": "git",
