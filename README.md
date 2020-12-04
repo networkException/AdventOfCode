@@ -22,6 +22,7 @@ networkException's Advent of Code solutions
 + Andi's [aoc2020](https://github.com/andi-makes/aoc2020)
 + Daan Breur's [AdventOfCode](https://github.com/daanbreur/AdventofCode)
 + derNiklaas' [AoC-2020](https://github.com/derNiklaas/AoC-2020)
++ Gewi413's [AdventOfCode](https://github.com/Gewi413/AdventOfCode)
 + Jonas' [AdventOfCode2020](https://github.com/joblo2213/AdventOfCode2020)
 + Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code)
 + LeMoonStars's [AoC20](https://github.com/LeMoonStar/AoC20/)
