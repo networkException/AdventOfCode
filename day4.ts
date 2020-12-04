@@ -37,5 +37,5 @@ console.log('Day 4B: ' + passports.filter(passport =>
     passport.has('eyr') && passport.get('eyr').length === 4 && Number(passport.get('eyr')) >= 2020 && Number(passport.get('eyr')) <= 2030 &&
     passport.has('hgt') && validheight(passport.get('hgt')) &&
     passport.has('hcl') && passport.get('hcl').match(/^#[a-f0-9]{6}$/) !== null &&
-    passport.has('ecl') && passport.get('ecl').match(/^(?:amb)|(?:blu)|(?:brn)|(?:gry)|(?:grn)|(?:hzl)|(?:oth)$/) !== null &&
+    passport.has('ecl') && passport.get('ecl').match(/^amb|blu|brn|gry|grn|hzl|oth$/) !== null &&
     passport.has('pid') && passport.get('pid').match(/^[0-9]{9}$/) !== null).length + ' passports are valid');
