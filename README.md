@@ -10,6 +10,7 @@
 networkException's Advent of Code solutions
 
 ### Check out other solutions :D
+
 + Andi's [aoc2020](https://github.com/andi-makes/aoc2020)
 + Daan Breur's [AdventOfCode](https://github.com/daanbreur/AdventofCode)
 + derNiklaas' [AoC-2020](https://github.com/derNiklaas/AoC-2020)
