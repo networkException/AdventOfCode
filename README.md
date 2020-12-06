@@ -10,15 +10,6 @@
 networkException's Advent of Code solutions
 
 ### Check out other solutions :D
-<<<<<<< HEAD
-*None yet because their repositories might change*
-||||||| parent of d02b284 (README: Readded other solutions and added finished first day)
-*None yet because their repositories might change*
-
-### Previous years
-
-- 2019 at commit `d2caac4eb16442af3da2e88affa40ae5af6e81d` ([view on github](https://github.com/networkException/AdventOfCode/tree/d2caac4eb16442af3da2e88affa40ae5af6e81d4))
-=======
 + Andi's [aoc2020](https://github.com/andi-makes/aoc2020)
 + Daan Breur's [AdventOfCode](https://github.com/daanbreur/AdventofCode)
 + derNiklaas' [AoC-2020](https://github.com/derNiklaas/AoC-2020)
