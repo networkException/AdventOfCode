@@ -86,38 +86,35 @@ const rules: Map<string, Array<Bag>> = new Map<string, Array<Bag>>(input.split('
     ];
 }));
 
-(() => {
-    const found: Set<string> = new Set<string>();
+const found: Set<string> = new Set<string>();
 
-    const find = (color: string): void => rules.forEach((ruleContains, ruleColor) => ruleContains.forEach(bag => {
-        if (bag.color === color) {
-            found.add(ruleColor);
-            find(ruleColor);
-        }
-    }));
+const find = (color: string): void => rules.forEach((ruleContains, ruleColor) => ruleContains.forEach(bag => {
+    if (bag.color === color) {
+        found.add(ruleColor);
+        find(ruleColor);
+    }
+}));
 
-    find('shiny gold');
+find('shiny gold');
 
-    console.log('Day 6A: ' + found.size + ' bags can contain the shiny gold one');
-})();
+console.log('Day 6A: ' + found.size + ' bags can contain the shiny gold one');
 
-(() => {
-    let result: number = 0;
 
-    const count = (color: string, quantity: number): void => {
-        rules.get(color).forEach(bag => {
-            const current: number = quantity * bag.quantity;
-            result += current;
-            count(bag.color, current);
+let counted: number = 0;
 
-            /*
-                Dammed be the examples, the first one works as well if I would call "count(bag.color, bag.quantity)" instead of
-                "count(bag.color, quantity * bag.quantity)". This cost me like 30 minutes of debugging
-            */
-        });
-    };
+const count = (color: string, quantity: number): void => {
+    rules.get(color).forEach(bag => {
+        const current: number = quantity * bag.quantity;
+        counted += current;
+        count(bag.color, current);
 
-    count('shiny gold', 1);
+        /*
+            Dammed be the examples, the first one works as well if I would call "count(bag.color, bag.quantity)" instead of
+            "count(bag.color, quantity * bag.quantity)". This cost me like 30 minutes of debugging
+        */
+    });
+};
 
-    console.log('Day 6B: ' + result + ' bags have to be contained in a shiny gold one');
-})();
+count('shiny gold', 1);
+
+console.log('Day 6B: ' + counted + ' bags have to be contained in a shiny gold one');
