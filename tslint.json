@@ -21,6 +21,7 @@
             true,
             "single"
         ],
-        "no-empty": false
+        "no-empty": false,
+        "no-shadowed-variable": false
     }
 }
