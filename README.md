@@ -11,17 +11,17 @@ networkException's Advent of Code solutions
 
 ### Check out other solutions :D
 
-+ Andi's [aoc2020](https://github.com/andi-makes/aoc2020)
-+ Daan Breur's [AdventOfCode](https://github.com/daanbreur/AdventofCode)
-+ derNiklaas' [AoC-2020](https://github.com/derNiklaas/AoC-2020)
-+ Gewi413's [AdventOfCode](https://github.com/Gewi413/AdventOfCode)
-+ Jonas' [AdventOfCode2020](https://github.com/joblo2213/AdventOfCode2020)
-+ Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code)
-+ LeMoonStars's [AoC20](https://github.com/LeMoonStar/AoC20/)
-+ Sammy's [AdventOfCode2020](https://github.com/1Turtle/AdventOfCode2020)
-+ syncopsta's [aoc_2020](https://github.com/syncopsta/aoc_2020)
-+ Trojaner's [AdventofCode2020](https://github.com/TrojanerHD/AdventofCode2020)
-+ voruti's [MyAoCSolutions](https://github.com/voruti/MyAoCSolutions)
++ Andi's [aoc2020](https://github.com/andi-makes/aoc2020) using `C++`
++ Daan Breur's [AdventOfCode](https://github.com/daanbreur/AdventofCode) using `Python`
++ derNiklaas' [AoC-2020](https://github.com/derNiklaas/AoC-2020) using `Java`
++ Gewi413's [AdventOfCode](https://github.com/Gewi413/AdventOfCode) using `Kotlin`
++ Jonas' [AdventOfCode2020](https://github.com/joblo2213/AdventOfCode2020) using `Java`
++ Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code) using `Java`
++ LeMoonStars's [AoC20](https://github.com/LeMoonStar/AoC20/) using `C++`
++ Sammy's [AdventOfCode2020](https://github.com/1Turtle/AdventOfCode2020) using `C++`
++ syncopsta's [aoc_2020](https://github.com/syncopsta/aoc_2020) using `Python`
++ Trojaner's [AdventofCode2020](https://github.com/TrojanerHD/AdventofCode2020) using `TypeScript`
++ voruti's [MyAoCSolutions](https://github.com/voruti/MyAoCSolutions) using `Java`
 
 ### Previous years
 
