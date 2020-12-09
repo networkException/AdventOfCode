@@ -18,6 +18,7 @@ networkException's Advent of Code solutions
 + Jonas' [AdventOfCode2020](https://github.com/joblo2213/AdventOfCode2020) using `Java`
 + Hax's [advent-of-code](https://github.com/Schlauer-Hax/advent-of-code) using `Java`
 + LeMoonStars's [AoC20](https://github.com/LeMoonStar/AoC20/) using `C++`
++ noeppi_noeppi's [aoc](https://github.com/noeppi-noeppi/aoc) using a different language every day
 + Sammy's [AdventOfCode2020](https://github.com/1Turtle/AdventOfCode2020) using `C++`
 + syncopsta's [aoc_2020](https://github.com/syncopsta/aoc_2020) using `Python`
 + Trojaner's [AdventofCode2020](https://github.com/TrojanerHD/AdventofCode2020) using `TypeScript`
