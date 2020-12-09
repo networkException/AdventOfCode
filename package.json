@@ -13,7 +13,8 @@
 		"day5": "tsc -p tsconfig.json && node day5.js",
 		"day6": "tsc -p tsconfig.json && node day6.js",
 		"day7": "tsc -p tsconfig.json && node day7.js",
-		"day8": "tsc -p tsconfig.json && node day8.js"
+		"day8": "tsc -p tsconfig.json && node day8.js",
+		"day9": "tsc -p tsconfig.json && node day9.js"
 	},
 	"repository": {
 		"type": "git",
