@@ -21,6 +21,7 @@ networkException's Advent of Code solutions
 + Sammy's [AdventOfCode2020](https://github.com/1Turtle/AdventOfCode2020)
 + syncopsta's [aoc_2020](https://github.com/syncopsta/aoc_2020)
 + Trojaner's [AdventofCode2020](https://github.com/TrojanerHD/AdventofCode2020)
++ voruti's [MyAoCSolutions](https://github.com/voruti/MyAoCSolutions)
 
 ### Previous years
 
