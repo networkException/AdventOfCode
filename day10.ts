@@ -61,22 +61,17 @@ const print = (chain: Array<Adapter>, index: number, key: string) => {
     process.stdout.write('\n');
 };
 
-// Stolen from https://github.com/joblo2213/AdventOfCode2020/blob/master/src/de/ungefroren/adventofcode/y2020/day10/Day10B.java for now, until I understand what it does myself
-const leapPermutations = (value: number, goal: number): number => {
-    if (value === goal) return 1;
-    if (value > goal) return 0;
-
-    let count: number = 0;
-
-    for (let i = 1; i <= 3; i++) {
-        count += leapPermutations(value + i, goal);
+const leapPermutations = (leaps: number): number => {
+    switch (leaps) {
+        case 1: return 1;
+        case 2: return 2; /* 1 1; 2 */
+        case 3: return 4; /* 1 1 1; 1 2; 2 1; 3 */
+        case 4: return 7; /* 1 1 1 1; 2 1 1; 1 2 1; 1 1 2; 3 1; 1 3; 2 2 */
     }
-
-    return count;
 };
 
 for (let i = 0; i < chain.length; i++) {
-    // print(chain, i, 'joltage');
+    print(chain, i, 'joltage');
 
     let leaps: number = 0;
 
@@ -85,8 +80,8 @@ for (let i = 0; i < chain.length; i++) {
     }
 
     if (leaps > 1) {
-        // console.log(leaps);
-        count *= leapPermutations(0, leaps);
+        console.log(leaps);
+        count *= leapPermutations(leaps);
         i += leaps;
     }
 }
