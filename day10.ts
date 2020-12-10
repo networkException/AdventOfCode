@@ -86,4 +86,4 @@ for (let i = 0; i < chain.length; i++) {
     }
 }
 
-console.log('Day 10A: There are ' + count + ' total ways the adapters could be chained');
+console.log('Day 10B: There are ' + count + ' total ways the adapters could be chained');
