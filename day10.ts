@@ -71,7 +71,7 @@ const leapPermutations = (leaps: number): number => {
 };
 
 for (let i = 0; i < chain.length; i++) {
-    print(chain, i, 'joltage');
+    // print(chain, i, 'joltage');
 
     let leaps: number = 0;
 
@@ -80,7 +80,7 @@ for (let i = 0; i < chain.length; i++) {
     }
 
     if (leaps > 1) {
-        console.log(leaps);
+        // console.log(leaps);
         count *= leapPermutations(leaps);
         i += leaps;
     }
