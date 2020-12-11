@@ -1,6 +1,6 @@
 import * as files from 'fs';
 
-const input: string = files.readFileSync('input/day7.txt').toString();
+const input: string = files.readFileSync('input/day07.txt').toString();
 
 interface Bag {
     color: string;

@@ -1,6 +1,6 @@
 import * as files from 'fs';
 
-const input: string = files.readFileSync('input/day8.txt').toString();
+const input: string = files.readFileSync('input/day08.txt').toString();
 
 interface Instruction {
     operation: string;

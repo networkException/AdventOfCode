@@ -1,6 +1,6 @@
 import * as files from 'fs';
 
-const input: string = files.readFileSync('input/day4.txt').toString();
+const input: string = files.readFileSync('input/day04.txt').toString();
 
 const passports: Array<Map<string, string>> = input.split('\n\n').map(passport => {
     const attributes: Map<string, string> = new Map<string, string>();
