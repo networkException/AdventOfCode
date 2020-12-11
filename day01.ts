@@ -1,6 +1,6 @@
 import * as files from 'fs';
 
-const input: Array<number> = files.readFileSync('input/day1.txt').toString().split('\n').map(Number);
+const input: Array<number> = files.readFileSync('input/day01.txt').toString().split('\n').map(Number);
 
 (() => {
     for (const line of input) {

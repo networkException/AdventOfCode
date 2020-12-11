@@ -1,6 +1,6 @@
 import * as files from 'fs';
 
-const input: string = files.readFileSync('input/day5.txt').toString();
+const input: string = files.readFileSync('input/day05.txt').toString();
 
 interface BoardingPass {
     row: number;

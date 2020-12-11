@@ -1,6 +1,6 @@
 import * as files from 'fs';
 
-const input: Array<number> = files.readFileSync('input/day9.txt').toString().split('\n').map(line => Number(line));
+const input: Array<number> = files.readFileSync('input/day09.txt').toString().split('\n').map(line => Number(line));
 const preamble: number = 25;
 
 const isValid = (value: number, previous: Array<number>): boolean => {

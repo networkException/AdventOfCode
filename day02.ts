@@ -1,6 +1,6 @@
 import * as files from 'fs';
 
-const input: Array<string> = files.readFileSync('input/day2.txt').toString().split('\n');
+const input: Array<string> = files.readFileSync('input/day02.txt').toString().split('\n');
 const pattern: RegExp = /^([0-9]+)-([0-9]+) (.): (.+)/;
 
 let validA: number = 0;

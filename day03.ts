@@ -1,6 +1,6 @@
 import * as files from 'fs';
 
-const input: string = files.readFileSync('input/day3.txt').toString();
+const input: string = files.readFileSync('input/day03.txt').toString();
 const lines: Array<string> = input.split('\n');
 
 const width: number = lines[0].length;

@@ -1,6 +1,6 @@
 import * as files from 'fs';
 
-const input: string = files.readFileSync('input/day6.txt').toString();
+const input: string = files.readFileSync('input/day06.txt').toString();
 
 const groups: Array<Array<Set<string>>> = input.split('\n\n').map(group => group.split('\n').map(person => {
     const questions: Set<string> = new Set<string>();
