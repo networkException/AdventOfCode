@@ -1,8 +1,8 @@
 # AdventOfCode
 
 [![About](https://img.shields.io/badge/Advent%20of%20Code-2020-red)](https://adventofcode.com/2020/about)
-[![Days completed](https://img.shields.io/badge/Days%20completed-11-brightgreen)](https://github.com/networkException/AdventOfCode/)
-[![Stars](https://img.shields.io/badge/Stars-22-yellow)](https://github.com/networkException/AdventOfCode/)
+[![Days completed](https://img.shields.io/badge/Days%20completed-12-brightgreen)](https://github.com/networkException/AdventOfCode/)
+[![Stars](https://img.shields.io/badge/Stars-24-yellow)](https://github.com/networkException/AdventOfCode/)
 [![Language](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
 [![Environment](https://img.shields.io/badge/Environment-Node-brightgreen)](https://nodejs.org/en/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0)
