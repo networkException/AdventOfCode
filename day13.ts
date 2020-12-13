@@ -31,6 +31,7 @@ const readkey = async () => {
     }
 })();
 
+/*
 (async () => {
     const highest: number = new Array<number>(...buses).sort((a, b) => b - a)[0];
     const highestIndex: number = buses.indexOf(highest);
@@ -39,11 +40,20 @@ const readkey = async () => {
 
     for (let i = 0; i < buses.length; i++) offsets[i] = i - highestIndex;
 
-    let i: number = highest;
+    let i: number = Math.floor(100000000000000 / highest) * highest;
     let highestRow: number = 0;
+
+    let logThreshold = 0;
 
     while (true) {
         i += highest;
+
+        if (logThreshold === 1000000000) {
+            console.log('Day 13B: Currently processing timestamp ' + i);
+            logThreshold = 0;
+        }
+
+        logThreshold++;
 
         let row: number = 0;
 
@@ -64,7 +74,7 @@ const readkey = async () => {
 
         if (highestRow < row) {
             highestRow = row;
-            console.log('Day 13B: Currently highest row ' + row + ' / ' + length);
+            console.log('Day 13B: Currently highest row ' + row + ' / ' + length + ' at ' + i);
         }
 
         if (row === length) {
@@ -75,3 +85,6 @@ const readkey = async () => {
         // await readkey();
     }
 })();
+*/
+
+console.log('Day 13B: The answer for me was 530015546283687, it took 7 hours, 42 minutes and 4 seconds to finish');
