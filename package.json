@@ -3,7 +3,6 @@
 	"version": "0.0.0",
 	"description": "networkException's Advent of Code solutions",
 	"main": "index.js",
-	"type": "module",
 	"scripts": {
 		"start": "tsc -p tsconfig.json && node all.js",
 		"day1": "tsc -p tsconfig.json && node day01.js",
