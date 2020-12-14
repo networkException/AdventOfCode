@@ -26,4 +26,8 @@ export class Parser {
 
         return false;
     }
+
+    public done(): boolean {
+        return this.tokens.length === 0;
+    }
 }
