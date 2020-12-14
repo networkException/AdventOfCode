@@ -4,18 +4,6 @@ const input: Array<string> = files.readFileSync('input/day13.txt').toString().sp
 const timestamp: number = Number(input[0]);
 const buses: Array<number> = input[1].split(',').map(bus => bus === 'x' ? -1 : Number(bus));
 
-const readkey = async () => {
-    process.stdin.setRawMode(true);
-
-    return new Promise<void>(resolve => process.stdin.once('data', data => {
-        const byteArray: Array<number> = [...data];
-        if (byteArray.length > 0 && byteArray[0] === 3) process.exit(0);
-
-        process.stdin.setRawMode(false);
-        resolve();
-    }));
-};
-
 (async () => {
     let i: number = timestamp;
 

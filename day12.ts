@@ -8,18 +8,6 @@ interface Instruction {
 type Action = (argument: number) => void;
 type Runnable = () => void;
 
-const readkey = async () => {
-    process.stdin.setRawMode(true);
-
-    return new Promise<void>(resolve => process.stdin.once('data', data => {
-        const byteArray: Array<number> = [...data];
-        if (byteArray.length > 0 && byteArray[0] === 3) process.exit(0);
-
-        process.stdin.setRawMode(false);
-        resolve();
-    }));
-};
-
 const print = (points: Array<Point>, icons: Array<string>, fromX: number, toX: number, fromY: number, toY: number): void => {
     for (let y = toY; y >= fromY; y--) {
         for (let x = fromX; x < toX; x++) {
