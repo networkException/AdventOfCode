@@ -14,18 +14,6 @@ interface Result {
 
 type Operation = (argument: number) => void;
 
-const readkey = async () => {
-    process.stdin.setRawMode(true);
-
-    return new Promise<void>(resolve => process.stdin.once('data', data => {
-        const byteArray: Array<number> = [...data];
-        if (byteArray.length > 0 && byteArray[0] === 3) process.exit(0);
-
-        process.stdin.setRawMode(false);
-        resolve();
-    }));
-};
-
 const interpret = (instructions: Array<Instruction>): Result => {
     let accumulator: number = 0;
     let pointer: number = 0;
