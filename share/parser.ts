@@ -28,6 +28,6 @@ export class Parser {
     }
 
     public done(): boolean {
-        return this.tokens.length === 0;
+        return this.tokens.length <= 0;
     }
 }
