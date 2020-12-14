@@ -52,7 +52,7 @@ const tokens: Array<Token> = tokenizer.tokenize(input, whitespace, newLine);
     let mask: string = '';
     const memory: Map<string, number> = new Map<string, number>(); // choose your data structures wisely when working with 36 bit number keys
 
-    while (tokens.length > 0) {
+    while (!parser.done()) {
         if (parser.matchAndTake('mask')) {
             parser.take(1); // =
             mask = parser.take(1);
