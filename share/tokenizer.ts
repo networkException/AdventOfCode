@@ -40,11 +40,14 @@ export class Tokenizer {
         while (source.length > 0) {
             for (const consumer of consumers) {
                 let shouldContinue: boolean = false;
-
-                consumer({
+                const context: Context = {
                     source,
                     continue: () => shouldContinue = true
-                });
+                };
+
+                consumer(context);
+
+                source = context.source;
 
                 if (shouldContinue) continue;
             }
