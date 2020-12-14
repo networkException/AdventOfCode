@@ -22,7 +22,7 @@ const tokens: Array<Token> = tokenizer.tokenize(input, whitespace, newLine);
     let mask: string = '';
     const memory: Array<number> = new Array<number>();
 
-    while (tokens.length > 0) {
+    while (!parser.done()) {
         if (parser.matchAndTake('mask')) {
             parser.take(1); // =
             mask = parser.take(1);
