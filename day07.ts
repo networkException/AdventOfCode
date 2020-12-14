@@ -17,7 +17,7 @@ interface Bag {
 }
 
 const rules: Map<string, Array<Bag>> = new Map<string, Array<Bag>>(input.split('\n').map(rule => {
-    const parser: Parser = new Parser(tokenizer.tokenize(input, whitespace));
+    const parser: Parser = new Parser(tokenizer.tokenize(rule, whitespace));
 
     return [
         parser.take(2), // current bag color
