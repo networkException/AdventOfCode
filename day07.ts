@@ -50,7 +50,7 @@ const find = (color: string): void => rules.forEach((ruleContains, ruleColor) =>
 
 find('shiny gold');
 
-console.log('Day 6A: ' + found.size + ' bags can contain the shiny gold one');
+console.log('Day 7A: ' + found.size + ' bags can contain the shiny gold one');
 
 
 let counted: number = 0;
@@ -70,4 +70,4 @@ const count = (color: string, quantity: number): void => {
 
 count('shiny gold', 1);
 
-console.log('Day 6B: ' + counted + ' bags have to be contained in a shiny gold one');
+console.log('Day 7B: ' + counted + ' bags have to be contained in a shiny gold one');
