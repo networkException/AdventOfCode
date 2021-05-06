@@ -22,6 +22,7 @@
             "single"
         ],
         "no-empty": false,
-        "no-shadowed-variable": false
+        "no-shadowed-variable": false,
+        "no-bitwise": false
     }
 }
