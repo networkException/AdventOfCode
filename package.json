@@ -21,7 +21,8 @@
 		"day14": "tsc -p tsconfig.json && node day14.js",
 		"day15": "tsc -p tsconfig.json && node day15.js",
         "day16": "tsc -p tsconfig.json && node day16.js",
-        "day17": "tsc -p tsconfig.json && node day17.js"
+        "day17": "tsc -p tsconfig.json && node day17.js",
+        "day18": "tsc -p tsconfig.json && node day18.js"
 	},
 	"repository": {
 		"type": "git",
