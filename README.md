@@ -9,7 +9,7 @@
 
 networkException's Advent of Code solutions
 
-### Check out other solutions :D
+## Check out other solutions :D
 
 + Andi's [aoc2020](https://github.com/andi-makes/aoc2020) using `C++`
 + Daan Breur's [AdventOfCode](https://github.com/daanbreur/AdventofCode) using `Python`
