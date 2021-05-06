@@ -9,7 +9,7 @@
 
 networkException's Advent of Code solutions
 
-### Check out other solutions :D
+## Check out other solutions :D
 
 + Andi's [aoc2020](https://github.com/andi-makes/aoc2020) using `C++`
 + Daan Breur's [AdventOfCode](https://github.com/daanbreur/AdventofCode) using `Python`
@@ -24,6 +24,6 @@ networkException's Advent of Code solutions
 + Trojaner's [AdventofCode2020](https://github.com/TrojanerHD/AdventofCode2020) using `TypeScript`
 + voruti's [MyAoCSolutions](https://github.com/voruti/MyAoCSolutions) using `Java`
 
-### Previous years
+## Previous years
 
-- 2019 at commit `d2caac4eb16442af3da2e88affa40ae5af6e81d` ([view on github](https://github.com/networkException/AdventOfCode/tree/d2caac4eb16442af3da2e88affa40ae5af6e81d4))
++ 2019 at commit `d2caac4eb16442af3da2e88affa40ae5af6e81d` ([view on github](https://github.com/networkException/AdventOfCode/tree/d2caac4eb16442af3da2e88affa40ae5af6e81d4))
