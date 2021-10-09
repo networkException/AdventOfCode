@@ -1,0 +1,72 @@
+{
+    "env": {
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "sort-imports-es6-autofix",
+        "@typescript-eslint",
+        "only-warn"
+    ],
+    "ignorePatterns": [
+        "previous/**",
+        "*.js",
+        "*.d.ts"
+    ],
+    "rules": {
+        "sort-imports-es6-autofix/sort-imports-es6": "warn",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": [
+            "warn",
+            {
+                "allowArgumentsExplicitlyTypedAsAny": true
+            }
+        ],
+        "no-else-return": "warn",
+        "no-trailing-spaces": "warn",
+        "eqeqeq": "warn",
+        "linebreak-style": [
+            "warn",
+            "unix"
+        ],
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "semi": [
+            "warn",
+            "always"
+        ],
+        "eol-last": [
+            "warn",
+            "always"
+        ],
+        "indent": [
+            "warn",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "no-empty": [
+            "warn",
+            {
+                "allowEmptyCatch": true
+            }
+        ],
+        "no-multiple-empty-lines": [
+            "warn",
+            {
+                "max": 999,
+                "maxEOF": 0
+            }
+        ]
+    }
+}
