@@ -1,0 +1,12 @@
+# editor
+.idea
+.vscode
+.history
+
+# npm
+node_modules
+lib
+
+# build files
+*.js
+*.js.map
