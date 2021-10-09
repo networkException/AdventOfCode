@@ -5,7 +5,6 @@
 [![Stars](https://img.shields.io/badge/Stars-37-yellow)](https://github.com/networkException/AdventOfCode/)
 [![Language](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
 [![Environment](https://img.shields.io/badge/Environment-Node-brightgreen)](https://nodejs.org/en/)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-red.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 networkException's Advent of Code solutions
 
