@@ -5,10 +5,11 @@
         "type": "git",
         "url": "git+https://github.com/networkException/AdventOfCode"
     },
+    "type": "module",
     "scripts": {
         "build": "tsc -p tsconfig.json",
         "test": "eslint .",
-        "start": "ts-node harness.ts"
+        "start": "node --no-warnings --loader ts-node/esm harness.ts"
     },
     "author": "networkException",
     "license": "BSD-3-Clause",
