@@ -18,7 +18,14 @@ Use `npm test` for linting.
 
 ### Check out other solutions
 
-+ Nothing here yet
++ Andreas Kohler's [andi-makes/aoc2021](https://github.com/andi-makes/aoc2021) using `rust`
++ Daan Breur's [daanbreur/AdventofCode](https://github.com/daanbreur/AdventofCode/tree/master/2021) using `Python`
++ Gewi413's [AdventOfCode](https://github.com/Gewi413/AdventOfCode/tree/2021) using `Kotin`
++ Hax's [Schlauer-Hax/advent-of-code](https://github.com/Schlauer-Hax/advent-of-code) using `Java` and `TypeScript`
++ Jonas' [J0B10/AdventOfCode2021](https://github.com/J0B10/AdventOfCode2021) using `Java`
++ Niklas' [derNiklaas/Advent-Of-Code-2021](https://github.com/derNiklaas/Advent-Of-Code-2021) using `Kotlin`
++ noeppi_noeppi's [noeppi-noeppi/aoc](https://github.com/noeppi-noeppi/aoc/tree/master/2021) a different language every day
++ Trojaner's [TrojanerHD/AdventofCode2021](https://github.com/TrojanerHD/AdventofCode2021) using `C++`
 
 ## Previous years
 
