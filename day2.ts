@@ -1,3 +1,4 @@
+import { logResult } from './logging.js';
 import { readFileSync } from 'fs';
 
 const instructions = readFileSync('input/day2').toString().split('\n');
@@ -19,7 +20,7 @@ const instructions = readFileSync('input/day2').toString().split('\n');
         }
     }
 
-    console.log(`day2/a: You get ${position.horizontal * position.depth} if you multiply your final horizontal position by your final depth`);
+    logResult `day2/a: You get ${position.horizontal * position.depth} if you multiply your final horizontal position by your final depth`;
 }
 
 {
@@ -40,5 +41,5 @@ const instructions = readFileSync('input/day2').toString().split('\n');
         }
     }
 
-    console.log(`day2/b: You get ${position.horizontal * position.depth} if you multiply your final horizontal position by your final depth`);
+    logResult `day2/b: You get ${position.horizontal * position.depth} if you multiply your final horizontal position by your final depth`;
 }
