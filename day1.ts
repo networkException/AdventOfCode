@@ -1,3 +1,4 @@
+import { logResult } from './logging.js';
 import { readFileSync } from 'fs';
 
 const lines = readFileSync('input/day1').toString().split('\n');
@@ -14,7 +15,7 @@ const lines = readFileSync('input/day1').toString().split('\n');
         previous = measurement;
     }
 
-    console.log(`day1/a: There are ${increased} measurements that are larger than the previous measurement.`);
+    logResult `day1/a: There are ${increased} measurements that are larger than the previous measurement.`;
 }
 
 {
@@ -29,5 +30,5 @@ const lines = readFileSync('input/day1').toString().split('\n');
         previous = measurement;
     }
 
-    console.log(`day1/b: There are ${increased} sums that are larger than the previous sum.`);
+    logResult `day1/b: There are ${increased} sums that are larger than the previous sum.`;
 }

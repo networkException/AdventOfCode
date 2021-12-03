@@ -1,3 +1,4 @@
+import { logResult } from './logging.js';
 import { readFileSync } from 'fs';
 
 const lines = readFileSync('input/day3').toString().split('\n');
@@ -15,7 +16,7 @@ const lines = readFileSync('input/day3').toString().split('\n');
     const gammaDecimal = parseInt(gamma, 2);
     const epsilonDecimal = parseInt(epsilon, 2);
 
-    console.log(`day3/a: ${gammaDecimal * epsilonDecimal} is the power consumption of the submarine`);
+    logResult `day3/a: ${gammaDecimal * epsilonDecimal} is the power consumption of the submarine`;
 }
 
 {
@@ -48,5 +49,5 @@ const lines = readFileSync('input/day3').toString().split('\n');
     const oxygenDecimal = parseInt(oxygenValues[0], 2);
     const co2Decimal = parseInt(co2Values[0], 2);
 
-    console.log(`day3/b: ${oxygenDecimal * co2Decimal} is the life support rating of the submarine`);
+    logResult `day3/b: ${oxygenDecimal * co2Decimal} is the life support rating of the submarine`;
 }
