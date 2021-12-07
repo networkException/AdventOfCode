@@ -28,6 +28,7 @@ Use `npm test` for linting.
 + Niklas' [derNiklaas/Advent-Of-Code-2021](https://github.com/derNiklaas/Advent-Of-Code-2021) using `Kotlin`
 + noeppi_noeppi's [noeppi-noeppi/aoc](https://github.com/noeppi-noeppi/aoc/tree/master/2021) a different language every day
 + Sammy's [1Turtle/AdventOfCode](https://github.com/1Turtle/AdventOfCode/tree/main/2021%20-%20LUA) using `lua`
++ Seralius' [AOC2021](https://github.com/Seralius/AOC2021) using `JavaScript`
 + Trojaner's [TrojanerHD/AdventofCode2021](https://github.com/TrojanerHD/AdventofCode2021) using `C++`
 
 ## Previous years
