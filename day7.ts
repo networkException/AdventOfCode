@@ -29,17 +29,26 @@ const crabs = readFileSync('input/day7').toString().split(',').map(Number).sort(
         return sum;
     };
 
-    const fuelList = new Array<number>();
     const max = (crabs.at(-1) ?? 0);
+
+    let smallestFuel;
 
     for (let i = crabs[0]; i <= max; i++) {
         let fuel = 0;
 
-        for (const crab of crabs)
+        for (const crab of crabs) {
             fuel += triangularNumber(Math.abs(crab - i));
 
-        fuelList.push(fuel);
+            if (smallestFuel !== undefined && fuel > smallestFuel)
+                break;
+        }
+
+        if (smallestFuel === undefined || fuel < smallestFuel)
+            smallestFuel = fuel;
     }
 
-    logResult `day7/b: They must spend ${fuelList.reduce((a, b) => a < b ? a : b)} fuel to align to that position`;
+    if (smallestFuel === undefined)
+        process.exit(1);
+
+    logResult `day7/b: They must spend ${smallestFuel} fuel to align to that position`;
 }
