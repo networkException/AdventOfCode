@@ -50,5 +50,5 @@ const lanternfish = readFileSync('input/day6').toString().split(',').map(Number)
 
     const count = digits.reduce((a, b) => a + b, 0n);
 
-    logResult `day6/b There would be ${count} lanternfish after 256 days`;
+    logResult `day6/b: There would be ${count} lanternfish after 256 days`;
 }
