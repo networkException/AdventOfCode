@@ -28,6 +28,22 @@ const isLowest = (x: number, y: number): boolean => {
 }
 
 {
+    const recurseIntoBasin = (x: number, y: number, basin: Array<{ x: number, y: number }>) => {
+        if (basin.some(entry => entry.x === x && entry.y === y))
+            return;
+
+        basin.push({ x, y });
+
+        if (above(x, y) < 9)
+            recurseIntoBasin(x, y - 1, basin);
+        if (below(x, y) < 9)
+            recurseIntoBasin(x, y + 1, basin);
+        if (left(x, y) < 9)
+            recurseIntoBasin(x - 1, y, basin);
+        if (right(x, y) < 9)
+            recurseIntoBasin(x + 1, y, basin);
+    };
+
     const basins = new Array<number>();
 
     for (let y = 0; y < heightmap.length; y++) {
@@ -35,23 +51,7 @@ const isLowest = (x: number, y: number): boolean => {
             if (isLowest(x, y)) {
                 const basin = new Array<{ x: number, y: number }>();
 
-                const recurseIntoBasin = (x: number, y: number) => {
-                    if (basin.some(entry => entry.x === x && entry.y === y))
-                        return;
-
-                    basin.push({ x, y });
-
-                    if (above(x, y) < 9)
-                        recurseIntoBasin(x, y - 1);
-                    if (below(x, y) < 9)
-                        recurseIntoBasin(x, y + 1);
-                    if (left(x, y) < 9)
-                        recurseIntoBasin(x - 1, y);
-                    if (right(x, y) < 9)
-                        recurseIntoBasin(x + 1, y);
-                };
-
-                recurseIntoBasin(x, y);
+                recurseIntoBasin(x, y, basin);
 
                 basins.push(basin.length);
             }
