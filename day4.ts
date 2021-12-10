@@ -75,7 +75,7 @@ const boards: Array<Board> = input.split('\n\n').slice(1).map(board => board.spl
 
     const [ drawn, unmarked ] = result;
 
-    logResult `day4/a: The final score if I chose that board will be ${drawn * unmarked}`;
+    logResult `day04/a: The final score if I chose that board will be ${drawn * unmarked}`;
 }
 
 {
@@ -108,5 +108,5 @@ const boards: Array<Board> = input.split('\n\n').slice(1).map(board => board.spl
 
     const [ drawn, unmarked ] = result;
 
-    logResult `day4/b: Once it wins, the score will be ${drawn * unmarked}`;
+    logResult `day04/b: Once it wins, the score will be ${drawn * unmarked}`;
 }

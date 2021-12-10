@@ -24,7 +24,7 @@ const isLowest = (x: number, y: number): boolean => {
             if (isLowest(x, y))
                 riskLevels += at(x, y) + 1;
 
-    logResult `day9/a: The sum of the risk levels of all low points on the heightmap is ${riskLevels}`;
+    logResult `day09/a: The sum of the risk levels of all low points on the heightmap is ${riskLevels}`;
 }
 
 {
@@ -60,5 +60,5 @@ const isLowest = (x: number, y: number): boolean => {
 
     const result = basins.sort((a, b) => b - a).slice(0, 3).reduce((a, b) => a * b);
 
-    logResult `day9/b: Multiplying together the sizes of the three largest basins results in ${result}`;
+    logResult `day09/b: Multiplying together the sizes of the three largest basins results in ${result}`;
 }
