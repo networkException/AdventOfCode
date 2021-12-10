@@ -50,7 +50,7 @@ const range = (start: number, end: number, step: number = 1, offset: number = 0)
 
     const overlapping = Array.from(points.values()).reduce((previous, current) => current >= 2 ? previous + 1 : previous, 0);
 
-    logResult `day5/a: At ${overlapping} points at least two lines overlap`;
+    logResult `day05/a: At ${overlapping} points at least two lines overlap`;
 }
 
 {
@@ -82,5 +82,5 @@ const range = (start: number, end: number, step: number = 1, offset: number = 0)
 
     const overlapping = Array.from(points.values()).reduce((previous, current) => current >= 2 ? previous + 1 : previous, 0);
 
-    logResult `day5/b: At ${overlapping} points at least two lines overlap`;
+    logResult `day05/b: At ${overlapping} points at least two lines overlap`;
 }

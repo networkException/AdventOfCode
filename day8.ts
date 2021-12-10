@@ -22,7 +22,7 @@ const entries = readFileSync('input/day8').toString().split('\n').map(entry => e
         }
     }
 
-    logResult `day8/a: In the output numbers 1, 4, 7 and 8 occur ${count} times`;
+    logResult `day08/a: In the output numbers 1, 4, 7 and 8 occur ${count} times`;
 }
 
 {
@@ -99,5 +99,5 @@ const entries = readFileSync('input/day8').toString().split('\n').map(entry => e
         result += parseInt(output);
     }
 
-    logResult `day8/b: Adding up all the output values results in ${result}`;
+    logResult `day08/b: Adding up all the output values results in ${result}`;
 }

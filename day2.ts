@@ -20,7 +20,7 @@ const instructions = readFileSync('input/day2').toString().split('\n');
         }
     }
 
-    logResult `day2/a: You get ${position.horizontal * position.depth} if you multiply your final horizontal position by your final depth`;
+    logResult `day02/a: You get ${position.horizontal * position.depth} if you multiply your final horizontal position by your final depth`;
 }
 
 {
@@ -41,5 +41,5 @@ const instructions = readFileSync('input/day2').toString().split('\n');
         }
     }
 
-    logResult `day2/b: You get ${position.horizontal * position.depth} if you multiply your final horizontal position by your final depth`;
+    logResult `day02/b: You get ${position.horizontal * position.depth} if you multiply your final horizontal position by your final depth`;
 }

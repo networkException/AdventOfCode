@@ -16,7 +16,7 @@ const crabs = readFileSync('input/day7').toString().split(',').map(Number).sort(
     const desiredPosition = median(crabs);
     const fuel = crabs.map(crab => Math.abs(crab - desiredPosition)).reduce((a, b) => a + b, 0);
 
-    logResult `day7/a: They must spend ${fuel} fuel to align to that position`;
+    logResult `day07/a: They must spend ${fuel} fuel to align to that position`;
 }
 
 {
@@ -50,5 +50,5 @@ const crabs = readFileSync('input/day7').toString().split(',').map(Number).sort(
     if (smallestFuel === undefined)
         process.exit(1);
 
-    logResult `day7/b: They must spend ${smallestFuel} fuel to align to that position`;
+    logResult `day07/b: They must spend ${smallestFuel} fuel to align to that position`;
 }

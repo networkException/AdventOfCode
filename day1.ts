@@ -15,7 +15,7 @@ const lines = readFileSync('input/day1').toString().split('\n');
         previous = measurement;
     }
 
-    logResult `day1/a: There are ${increased} measurements that are larger than the previous measurement.`;
+    logResult `day01/a: There are ${increased} measurements that are larger than the previous measurement.`;
 }
 
 {
@@ -30,5 +30,5 @@ const lines = readFileSync('input/day1').toString().split('\n');
         previous = measurement;
     }
 
-    logResult `day1/b: There are ${increased} sums that are larger than the previous sum.`;
+    logResult `day01/b: There are ${increased} sums that are larger than the previous sum.`;
 }
