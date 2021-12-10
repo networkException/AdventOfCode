@@ -19,7 +19,9 @@ if (days[0] === 'all') {
 
     console.time('all');
 
-    for (const day of readdirSync('.').filter(name => name.startsWith('day') && name.endsWith('.js')))
+    const numberOfDay = (day: string): number => parseInt(day.substring('day'.length, day.length - '.js'.length));
+
+    for (const day of readdirSync('.').filter(name => name.startsWith('day') && name.endsWith('.js')).sort(((a, b) => numberOfDay(a) - numberOfDay(b))))
         execSync(`node ${day}`, { encoding: 'utf8', stdio: 'inherit' });
 
     console.timeLog('all', 'Execution of all days (with overhead of this being run in node)');
