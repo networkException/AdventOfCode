@@ -34,7 +34,7 @@ for (const line of input) {
             if (connected.toLowerCase() === connected && path.includes(connected))
                 continue;
 
-            const currentPath = new Array<string>(...path);
+            const currentPath = path.slice();
             currentPath.push(connected);
 
             recursePaths(connected, currentPath);
