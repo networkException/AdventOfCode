@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 
 type Dot = { x: number, y: number };
 class TransparentPaper {
-    private dots: Array<Dot> = new Array<Dot>();
+    private dots: Set<string> = new Set<string>();
 
     public width: number = 0;
     public height: number = 0;
@@ -17,7 +17,7 @@ class TransparentPaper {
             if (y > this.height)
                 this.height = y;
 
-            this.dots.push({ x, y });
+            this.dots.add(`${x},${y}`);
         }
     }
 
@@ -64,15 +64,11 @@ class TransparentPaper {
     }
 
     private hasDotAt(x: number, y: number): boolean {
-        for (const dot of this.dots)
-            if (dot.x === x && dot.y === y)
-                return true;
-
-        return false;
+        return this.dots.has(`${x},${y}`);
     }
 
     private setDotAt(x: number, y: number): void {
-        this.dots.push({ x, y });
+        this.dots.add(`${x},${y}`);
     }
 }
 
