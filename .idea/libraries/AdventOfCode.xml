@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="AdventOfCode">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/AdventOfCode/AdventOfCode.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

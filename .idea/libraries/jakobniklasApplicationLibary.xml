@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jakobniklasApplicationLibary">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Library/jakobniklasApplicationLibary.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

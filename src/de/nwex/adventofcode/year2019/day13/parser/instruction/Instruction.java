@@ -1,0 +1,18 @@
+package de.nwex.adventofcode.year2019.day13.parser.instruction;
+
+import de.nwex.adventofcode.year2019.day13.parser.Memory;
+import java.util.List;
+
+public abstract class Instruction
+{
+    protected Memory memory;
+
+    public abstract Integer parameterCount();
+
+    public abstract void run(List<Parameter> parameters);
+
+    void setMemory(Memory memory)
+    {
+        this.memory = memory;
+    }
+}
