@@ -1,0 +1,11 @@
+.vscode
+.idea
+
+*.class
+
+.gradle
+**/build/
+
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
